@@ -1,5 +1,3 @@
-require 'mixology'
-
 module Proof  
   def start
     def_prove
@@ -15,13 +13,12 @@ module Proof
       # def prove(&blk)
       def prove(method=nil, &blk)
         proof_module = self.class.const_get :Proof
-        mixin proof_module
+        extend proof_module
         proof = if method
                   send method, &blk
                 else
                   instance_eval &blk
                 end
-        unmix proof_module
         proof
       end
     end
