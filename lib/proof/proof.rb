@@ -12,10 +12,15 @@ module Proof
   
   def def_prove
     Object.class_eval do
-      def prove(&blk)
+      # def prove(&blk)
+      def prove(method=nil, &blk)
         proof_module = self.class.const_get :Proof
         mixin proof_module
-        proof = instance_eval &blk
+        proof = if method
+                  send method, &blk
+                else
+                  instance_eval &blk
+                end
         unmix proof_module
         proof
       end
