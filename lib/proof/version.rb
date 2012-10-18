@@ -1,3 +1,3 @@
-module Observance
+module Proof
   VERSION = "0.0.0"
 end

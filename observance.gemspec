@@ -2,15 +2,16 @@
 lib = File.expand_path('../lib/', __FILE__)
 $:.unshift lib unless $:.include?(lib)
 
-require 'observance/version'
+require 'proof/version'
 
 Gem::Specification.new do |s|
-  s.name = 'observance'
-  s.summary = 'Observance Library'
-  s.version = Observance::VERSION
+  s.name = 'proof'
+  s.summary = 'Proof Library'
+  s.version = Proof::VERSION
   s.authors = 'We made this'
-  s.require_paths = ["lib"]
-  s.files = Dir.glob("{lib}/**/*")
   s.platform = Gem::Platform::RUBY
-  s.required_ruby_version = ">= 1.9.2"
+  s.required_ruby_version = '>= 1.9.2'
+  s.require_paths = ['lib']
+  s.files = Dir.glob('{lib}/**/*')
+  s.add_dependency 'mixology'
 end
