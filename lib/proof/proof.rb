@@ -11,15 +11,15 @@ module Proof
   def def_prove
     Object.class_eval do
       # def prove(&blk)
-      def prove(method=nil, &blk)
+      def prove(&blk)
         proof_module = self.class.const_get :Proof
         extend proof_module
-        proof = if method
-                  send method, &blk
-                else
-                  instance_eval &blk
-                end
-        proof
+        proven = instance_eval &blk
+
+        msg = "Proven"
+        puts proven ? msg : "Not #{msg.downcase}"
+
+        proven
       end
     end
   end
