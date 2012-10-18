@@ -7,7 +7,7 @@ require 'observance/version'
 Gem::Specification.new do |s|
   s.name = 'observance'
   s.summary = 'Observance Library'
-  s.version = Messaging::VERSION
+  s.version = Observance::VERSION
   s.authors = 'We made this'
   s.require_paths = ["lib"]
   s.files = Dir.glob("{lib}/**/*")
