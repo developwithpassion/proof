@@ -1,7 +1,7 @@
 module Proof  
   def start
-    def_prove
     if block_given?
+      def_prove
       yield
       undef_prove
     end
