@@ -7,10 +7,9 @@ module Proof
     end
   end
   module_function :start
-  
+
   def def_prove
     Object.class_eval do
-      # def prove(&blk)
       def prove(&blk)
         proof_module = self.class.const_get :Proof
         extend proof_module
