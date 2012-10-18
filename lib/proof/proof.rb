@@ -1,6 +1,6 @@
 module Proof  
-  def start(description="")
-    @@description = description
+  def start(description=nil)
+    @@description ||= description
     if block_given?
       def_prove
       yield
@@ -14,6 +14,11 @@ module Proof
   end
   module_function :description
 
+  def description=(val)
+    @@description = val
+  end
+  module_function :description=
+
   def def_prove
     Object.class_eval do
       def prove(&blk)
@@ -24,6 +29,8 @@ module Proof
         msg = proven ? "Pass:" : "Fail:"
         msg = "#{msg} #{Proof.description}"
         puts msg
+
+        Proof.description = nil
 
         proven
       end
@@ -37,4 +44,10 @@ module Proof
     end
   end
   module_function :undef_prove
+
+  module Description
+    def desc(text)
+      Proof.description = text
+    end
+  end
 end
