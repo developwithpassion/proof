@@ -1,1 +1,1 @@
-require 'observance/observance'
+require 'proof/proof'
