@@ -21,7 +21,7 @@ module Proof
         extend proof_module
         proven = instance_eval &blk
 
-        msg = proven ? "Proven:" : "Not proven:"
+        msg = proven ? "Pass:" : "Fail:"
         msg = "#{msg} #{Proof.description}"
         puts msg
 
