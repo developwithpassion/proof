@@ -1,5 +1,6 @@
 module Proof  
-  def start
+  def start(description="")
+    @@description = description
     if block_given?
       def_prove
       yield
@@ -8,6 +9,11 @@ module Proof
   end
   module_function :start
 
+  def description
+    @@description
+  end
+  module_function :description
+
   def def_prove
     Object.class_eval do
       def prove(&blk)
@@ -15,8 +21,9 @@ module Proof
         extend proof_module
         proven = instance_eval &blk
 
-        msg = "Proven"
-        puts proven ? msg : "Not #{msg.downcase}"
+        msg = proven ? "Proven:" : "Not proven:"
+        msg = "#{msg} #{Proof.description}"
+        puts msg
 
         proven
       end
