@@ -1,21 +1,22 @@
 module Proof  
   def start(description=nil)
-    @@description ||= description
+    @description ||= description
     if block_given?
       def_prove
       yield
       undef_prove
     end
+    @description = nil
   end
   module_function :start
 
   def description
-    @@description
+    @description
   end
   module_function :description
 
   def description=(val)
-    @@description = val
+    @description = val
   end
   module_function :description=
 
@@ -30,8 +31,6 @@ module Proof
         msg = "#{msg}:" if Proof.description
         msg = "#{msg} #{Proof.description}".strip
         puts msg
-
-        Proof.description = nil
 
         proven
       end
