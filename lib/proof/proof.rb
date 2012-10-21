@@ -51,3 +51,5 @@ module Proof
     end
   end
 end
+
+include Proof::Description

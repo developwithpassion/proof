@@ -2,5 +2,3 @@ puts "Ruby Version: #{RUBY_VERSION} #{RUBY_PATCHLEVEL} #{RUBY_PLATFORM} (#{`whic
 
 require_relative '../init.rb'
 require 'proof'
-
-include Proof::Description
