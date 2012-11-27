@@ -23,7 +23,12 @@ module Proof
   def def_prove
     Object.class_eval do
       def prove(&blk)
-        proof_module = self.class.const_get :Proof
+        if self.class == Module
+          proof_module = self.const_get :Proof
+        else
+          proof_module = self.class.const_get :Proof
+        end
+        
         extend proof_module
         proven = instance_eval &blk
 
