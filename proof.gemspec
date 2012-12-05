@@ -2,12 +2,10 @@
 lib = File.expand_path('../lib/', __FILE__)
 $:.unshift lib unless $:.include?(lib)
 
-require 'proof/version'
-
 Gem::Specification.new do |s|
   s.name = 'proof'
   s.summary = 'Proof Library'
-  s.version = Proof::VERSION
+  s.version = '0.0.0'
   s.authors = 'We made this'
   s.platform = Gem::Platform::RUBY
   s.required_ruby_version = '>= 1.9.2'
