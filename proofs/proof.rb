@@ -18,3 +18,4 @@ proof 'A passing proof' do
   thing = Thing.new
   thing.prove { some_method }
 end
+
