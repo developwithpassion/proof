@@ -1,7 +1,6 @@
 module Proof
   extend self
 
-
   def description
     @description
   end
@@ -16,10 +15,10 @@ module Proof
   end
 
   def begin
-    ObjectCoreExt.define_prove
+    CoreExt::Object::Methods.define_prove
   end
 
   def end
-    ObjectCoreExt.undefine_prove
+    CoreExt::Object::Methods.undefine_prove
   end
 end

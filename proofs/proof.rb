@@ -3,9 +3,6 @@ require_relative 'thing'
 
 include Proof::DSL
 
-Proof::begin
-
-desc 'A failing proof'
 class Thing
   module Proof
     def some_method
@@ -14,10 +11,14 @@ class Thing
     end
   end 
 end
+
+Proof.begin
+
+desc 'A failing proof'
 thing = Thing.new
 thing.prove { not some_method }
 
-Proof::end
+Proof.end
 
 
 proof 'A passing proof' do
