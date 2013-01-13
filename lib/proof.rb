@@ -1,4 +1,4 @@
-require 'proof/proof_resolution'
+require 'proof/proof_module'
 require 'proof/proof_specification'
 require 'proof/proof'
 require 'proof/proof_block'

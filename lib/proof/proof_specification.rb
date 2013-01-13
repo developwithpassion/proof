@@ -7,7 +7,7 @@ module Proof
     end
 
     def self.run(obj_under_test, &blk)
-      proof_module = ProofResolution.find_proof_module_for(obj_under_test)
+      proof_module = ProofModule.get(obj_under_test)
       proof = ProofSpecification.new(obj_under_test,proof_module,&blk)
       proof.is_valid
     end
