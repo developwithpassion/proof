@@ -16,16 +16,14 @@ class ThingThatRaisesAnError
   end
 end
 
-desc 'When an error is raised subsequent proofs still run'
+heading 'When an error is raised subsequent proofs still run'
+
+desc 'Raises an error'
 item = ThingThatRaisesAnError.new
 item.prove{ raises_an_error }
 
 ran_next = false
-item.prove do
-  ran_next = true
-end
+item.instance_eval { ran_next = true }
 
+desc 'Still runs'
 item.prove{ ran_next }
-
-
-
