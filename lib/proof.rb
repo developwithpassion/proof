@@ -1,5 +1,5 @@
 require 'proof/proof_resolution'
 require 'proof/proof_specification'
-require 'proof/proof_item'
 require 'proof/proof'
+require 'proof/proof_block'
 require 'proof/dsl'

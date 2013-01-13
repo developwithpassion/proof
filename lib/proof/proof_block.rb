@@ -1,5 +1,5 @@
 module Proof
-  class ProofItem
+  class ProofBlock
     def initialize(&blk)
       @blk = blk
     end
