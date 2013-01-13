@@ -5,9 +5,9 @@ module Proof
     end
 
     def run
-      Proof::start
+      Proof::begin
       result = @blk.call
-      Proof::stop
+      Proof::end
       result
     end
   end
