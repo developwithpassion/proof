@@ -10,7 +10,10 @@ module Proof
           proof_module = Proof::proof_module(obj_under_test)
           obj_under_test.extend proof_module
 
-          obj_under_test.instance_eval &blk
+          result = obj_under_test.instance_eval &blk
+          message = result ? "Pass:" : "Fail:"
+          message = "#{message} #{Proof::description}"
+          puts message
         end
       end
     end
