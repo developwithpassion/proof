@@ -16,8 +16,12 @@ module Proof
               proof_module = Proof::proof_module(obj_under_test)
               obj_under_test.extend proof_module
 
-              result = obj_under_test.instance_eval &blk
-              message = result ? "Pass:" : "Fail:"
+              begin
+                result = obj_under_test.instance_eval &blk
+                message = result ? "Pass:" : "Fail:"
+              rescue
+                message = "Error:"
+              end
               message = "#{message} #{Proof::description}"
               ## ->
               puts message
