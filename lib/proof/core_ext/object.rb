@@ -2,7 +2,7 @@ module Proof
   module ObjectCoreExt
     extend self
 
-    def def_prove
+    def define_prove
       Object.class_eval do
         def prove(&blk)
           obj_under_test = self
@@ -15,7 +15,7 @@ module Proof
       end
     end
 
-    def undef_prove
+    def undefine_prove
       Object.class_eval do
         undef :prove
       end

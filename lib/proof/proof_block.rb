@@ -5,9 +5,9 @@ module Proof
     end
 
     def run
-      ObjectCoreExt.def_prove
+      Proof::start
       result = @blk.call
-      ObjectCoreExt.undef_prove
+      Proof::stop
       result
     end
   end
