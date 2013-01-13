@@ -1,3 +1,3 @@
 require 'proof/core_ext'
 require 'proof/proof'
-require 'proof/dsl'
+require 'proof/sketch_style'

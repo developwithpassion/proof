@@ -1,7 +1,7 @@
 require_relative 'proofs_init'
 require_relative 'thing'
 
-include Proof::DSL
+include Proof::SketchStyle
 
 class Thing
   module Proof
