@@ -1,6 +1,8 @@
 module Proof
   module Configuration
     module Output
+      extend self
+
       def configure
         layout_type = Logging::Layouts::Pattern
         layout_options = { :pattern => '%c: %m\n' }
@@ -33,6 +35,8 @@ module Proof
         output.fail_logger = Logging.logger['Fail']
         output.fail_logger.add_appenders fail_appender
       end
+
+      configure
     end
   end
 end
