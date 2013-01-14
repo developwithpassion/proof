@@ -1,5 +1,5 @@
 require_relative '../proofs_init'
-require_relative 'thing'
+require 'proof/thing'
 
 include Proof::SketchStyle
 
