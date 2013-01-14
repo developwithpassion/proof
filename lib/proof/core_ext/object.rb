@@ -22,8 +22,8 @@ module Proof
                 messsage = Proof::description
               rescue => error
                 method = :error
-                messsage = "(#{error.class}) \"#{error.message}\" at #{error.backtrace[0]}"
-                backtrace = error.backtrace.join("\n")
+                line_detail =  error.backtrace[0].gsub(/.*\/(proofs\/.*\.rb.*)/,'\1')
+                messsage = "(#{error.class}) \"#{error.message}\" at #{line_detail}"
               end
               Output.send method, messsage
 
@@ -39,12 +39,6 @@ module Proof
             undef :prove
           end
         end
-
-          def proof_module(obj_under_test)
-    mod = obj_under_test.class == Module ? obj_under_test : obj_under_test.class
-    mod.const_get :Proof
-  end
-
       end
     end
   end

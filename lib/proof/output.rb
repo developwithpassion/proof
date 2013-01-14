@@ -3,6 +3,7 @@ module Proof
     attr_accessor :pass_logger
     attr_accessor :fail_logger
     attr_accessor :error_logger
+    attr_accessor :debug_logger
     attr_accessor :info_logger
 
     def self.instance
