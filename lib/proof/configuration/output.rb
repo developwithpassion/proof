@@ -15,6 +15,9 @@ module Proof
         fail_appender_type = Logging::Appenders::Stderr
         fail_appender_options = { :level => :error }
 
+        error_appender_type = Logging::Appenders::Stderr
+        error_appender_options = { :level => :debug }
+
 
         layout = layout_type.new(layout_options)
         layout_opts = { :layout => layout }
@@ -29,6 +32,11 @@ module Proof
           layout_opts.merge(fail_appender_options)
         )
 
+        error_appender = error_appender_type.new(
+          name = 'error_appender',
+          layout_opts.merge(error_appender_options)
+        )
+
         output = Proof::Output.instance
 
         output.pass_logger = Logging.logger['Pass']
@@ -36,6 +44,9 @@ module Proof
 
         output.fail_logger = Logging.logger['Fail']
         output.fail_logger.add_appenders fail_appender
+
+        output.error_logger = Logging.logger['Error']
+        output.error_logger.add_appenders error_appender
       end
 
       configure
