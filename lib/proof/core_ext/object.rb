@@ -30,7 +30,8 @@ module Proof
 
               if method == :error
                 backtrace.reject! {|l| l =~ /proof\/lib\/proof/ }
-                Output.debug backtrace.join("\n")
+
+                Output.debug "Backtrace:\n  #{backtrace.join("\n  ")}"
               end
             end
           end
