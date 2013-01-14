@@ -8,7 +8,7 @@ module Proof
       def configure
         layout_type = Logging::Layouts::Pattern
         proof_result_layout_options = { :pattern => '%c: %m\n' }
-        info_layout_options = { :pattern => '%c: %m\n' }
+        info_layout_options = { :pattern => '%m\n' }
 
         pass_appender_type = Logging::Appenders::Stdout
         pass_appender_options = { :level => :info }
