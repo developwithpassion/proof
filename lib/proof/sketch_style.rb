@@ -15,11 +15,11 @@ module Proof
     # TODO
     # Use Output.write
     def comment(comment='')
-      puts comment
+      Output.info comment
     end
 
     def heading(heading='')
-      puts "\n#{heading}"
+      Output.info "\n#{heading}"
     end
   end
 end

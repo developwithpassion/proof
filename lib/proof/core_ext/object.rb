@@ -18,13 +18,11 @@ module Proof
 
               begin
                 result = obj_under_test.instance_eval &blk
-                message = result ? "Pass:" : "Fail:"
-              rescue
-                message = "Error:"
+                method = result ? :pass : :fail
+              rescue => detail
+                method = :error
               end
-              message = "#{message} #{Proof::description}"
-              ## ->
-              puts message
+              Output.send method, Proof::description
             end
           end
         end
