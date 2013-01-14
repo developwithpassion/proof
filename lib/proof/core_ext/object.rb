@@ -23,8 +23,13 @@ module Proof
               rescue => error
                 method = :error
                 messsage = "(#{error.class}) \"#{error.message}\" at #{error.backtrace[0]}"
+                backtrace = error.backtrace.join("\n")
               end
               Output.send method, messsage
+
+              if method == :error
+                Output.info backtrace
+              end
             end
           end
         end
