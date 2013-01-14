@@ -19,12 +19,12 @@ module Proof
               begin
                 result = obj_under_test.instance_eval &blk
                 method = result ? :pass : :fail
+                messsage = Proof::description
               rescue => error
-                p "#{error.class}: #{error.message} (at #{error.backtrace[0]})"
-
                 method = :error
+                messsage = "(#{error.class}) \"#{error.message}\" at #{error.backtrace[0]}"
               end
-              Output.send method, Proof::description
+              Output.send method, messsage
             end
           end
         end

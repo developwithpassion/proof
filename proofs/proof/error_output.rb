@@ -5,7 +5,7 @@ include Proof::SketchStyle
 Proof::begin
 
 
-desc 'Exceptions should be output to the console'
+desc 'Errors are output'
 item = Object.new
 
 item.prove { raise 'This is an error'}
