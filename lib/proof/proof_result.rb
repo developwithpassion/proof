@@ -4,5 +4,9 @@ module Proof
       @method = method
       @error = error
     end
+
+    def write
+
+    end
   end
 end

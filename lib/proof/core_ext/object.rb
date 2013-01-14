@@ -15,7 +15,7 @@ module Proof
               execution.blk = blk
 
               result = execution.run
-              result
+              result.write
             end
           end
         end

@@ -21,6 +21,10 @@ class ProofResult
       Output.debug "raised_an_error? == #{@method == :error}"
       @method == :error && error?
     end
+    def written?
+      Output.debug "Displayed the result == #{@written == true}"
+      @written
+    end
   end
 end
 
