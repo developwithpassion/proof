@@ -20,10 +20,10 @@ module Proof
                 result = obj_under_test.instance_eval &blk
                 method = result ? :pass : :fail
               rescue => error
+                p "#{error.class}: #{error.message} (at #{error.backtrace[0]})"
+
                 method = :error
               end
-              p "#{error.class}: #{error.message} (at #{error.backtrace[0]})"
-
               Output.send method, Proof::description
             end
           end
