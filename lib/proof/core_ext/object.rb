@@ -22,13 +22,15 @@ module Proof
                 messsage = Proof::description
               rescue => error
                 method = :error
-                line_detail =  error.backtrace[0].gsub(/.*\/(proofs\/.*\.rb.*)/,'\1')
+                backtrace = error.backtrace
+                line_detail = backtrace[0].gsub(/.*\/proofs\/proof\/(.*\.rb.*)/,'\1')
                 messsage = "(#{error.class}) \"#{error.message}\" at #{line_detail}"
               end
               Output.send method, messsage
 
               if method == :error
-                Output.info backtrace
+                backtrace.reject! {|l| l =~ /proof\/lib\/proof/ }
+                Output.debug backtrace.join("\n")
               end
             end
           end

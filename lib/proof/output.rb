@@ -45,5 +45,14 @@ module Proof
       @error_logger.debug text
       text
     end
+
+    def self.debug(text)
+      instance.debug text
+    end
+
+    def debug(text)
+      @debug_logger.debug text
+      text
+    end
   end
 end
