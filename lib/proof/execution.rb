@@ -1,14 +1,16 @@
 module Proof
   class Execution
+    attr_reader :description
     attr_reader :obj_under_test
     attr_reader :blk
 
-    def self.run(obj_under_test, blk)
-      instance = new obj_under_test, blk
+    def self.run(description, obj_under_test, blk)
+      instance = new description, obj_under_test, blk
       instance.run
     end
 
-    def initialize(obj_under_test, blk)
+    def initialize(description, obj_under_test, blk)
+      @description = description
       @obj_under_test = obj_under_test
       @blk = blk
     end
@@ -21,7 +23,7 @@ module Proof
       rescue => error
         status = :error
       end
-      Proof::Result.new status, error
+      Proof::Result.new description, status, error
     end
   end
 end
