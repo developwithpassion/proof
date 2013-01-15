@@ -22,8 +22,8 @@ module Proof
         info_appender_type = Logging::Appenders::Stdout
         info_appender_options = { :level => :info }
 
-        debug_appender_type = Logging::Appenders::Stdout
-        debug_appender_options = { :level => :debug }
+        details_appender_type = Logging::Appenders::Stdout
+        details_appender_options = { :level => :debug }
 
         proof_layout = layout_type.new(proof_result_layout_options)
         proof_layout_opts = { :layout => proof_layout }
@@ -51,9 +51,9 @@ module Proof
           info_layout_opts.merge(info_appender_options)
         )
 
-        debug_appender = debug_appender_type.new(
-          name = 'debug_appender',
-          info_layout_opts.merge(debug_appender_options)
+        details_appender = details_appender_type.new(
+          name = 'details_appender',
+          info_layout_opts.merge(details_appender_options)
         )
 
         output = Proof::Output.instance
@@ -70,8 +70,8 @@ module Proof
         output.info_logger = Logging.logger['Info']
         output.info_logger.add_appenders info_appender
 
-        output.debug_logger = Logging.logger['Debug']
-        output.debug_logger.add_appenders debug_appender
+        output.details_logger = Logging.logger['Details']
+        output.details_logger.add_appenders details_appender
       end
 
       configure

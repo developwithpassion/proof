@@ -7,19 +7,19 @@ module Proof
         @error.nil?
       end
       def passed?
-        Output.debug "passed? == #{@method == :pass}"
+        Output.details "passed? == #{@method == :pass}"
         @method == :pass && !error?
       end
       def failed?
-        Output.debug "failed? == #{@method == :fail}"
+        Output.details "failed? == #{@method == :fail}"
         @method == :fail && !error?
       end 
       def raised_an_error?
-        Output.debug "raised_an_error? == #{@method == :error}"
+        Output.details "raised_an_error? == #{@method == :error}"
         @method == :error && error?
       end
       def written?
-        Output.debug "Displayed the result == #{@written == true}"
+        Output.details "Displayed the result == #{@written == true}"
         @written
       end
     end
@@ -34,33 +34,29 @@ module Proof
   end
 end
 
+def execution(blk)
+  obj_under_test = Object.new
+
+  execution = Proof::Execution.new obj_under_test, blk
+end
+
 proof 'Passes' do
-
-  execution = ProofExecution.new
-  execution.obj_under_test = Object.new
-  execution.blk = Proc.new { true }
-
-  result = execution.run
+  blk = Proc.new { true }
+  result = execution(blk).run
 
   result.prove { passed? }
 end
 
 proof 'Fails' do
-  execution = ProofExecution.new
-  execution.obj_under_test = Object.new
-  execution.blk = Proc.new { false }
-
-  result = execution.run
+  blk = Proc.new { false }
+  result = execution(blk).run
 
   result.prove { failed? }
 end
 
 proof 'Raises an error' do
-  execution = ProofExecution.new
-  execution.obj_under_test = Object.new
-  execution.blk = Proc.new { raise }
-
-  result = execution.run
+  blk = Proc.new { raise }
+  result = execution(blk).run
 
   result.prove { raised_an_error? }
 end
