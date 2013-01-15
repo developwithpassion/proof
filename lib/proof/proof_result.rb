@@ -6,7 +6,6 @@ module Proof
     end
 
     def write
-
     end
   end
 end

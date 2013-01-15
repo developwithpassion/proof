@@ -10,8 +10,9 @@ module Proof
               obj_under_test = self
               proof_module = Proof::proof_module(obj_under_test)
               obj_under_test.extend proof_module
+
               execution = ProofExecution.new
-              execution.obj_under_test =  obj_under_test
+              execution.obj_under_test = obj_under_test
               execution.blk = blk
 
               result = execution.run

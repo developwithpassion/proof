@@ -1,7 +1,5 @@
 require_relative '../proofs_init'
 
-require 'proof/proof_execution'
-
 include Proof::SketchStyle
 
 module Proof
@@ -39,7 +37,8 @@ module Proof
 end
 
 
-proof 'Runs a passing proof' do
+proof 'Passes' do
+
   execution = ProofExecution.new
   execution.obj_under_test = Object.new
   execution.blk = Proc.new { true }
@@ -49,7 +48,7 @@ proof 'Runs a passing proof' do
   result.prove { passed? }
 end
 
-proof 'Runs a failing proof' do
+proof 'Fails' do
   execution = ProofExecution.new
   execution.obj_under_test = Object.new
   execution.blk = Proc.new { false }
@@ -59,7 +58,7 @@ proof 'Runs a failing proof' do
   result.prove { failed? }
 end
 
-proof 'Runs a error raising proof' do
+proof 'Raises an error' do
   execution = ProofExecution.new
   execution.obj_under_test = Object.new
   execution.blk = Proc.new { raise }
