@@ -7,5 +7,9 @@ module Proof
     def self.current=(val)
       @current = val
     end
+
+    def self.current
+      @current
+    end
   end
 end
