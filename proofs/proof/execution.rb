@@ -5,7 +5,7 @@ module Proof
     module Proof
       def error?
         !@error.nil?
-      end 
+      end
       def passed?
         Output.details "passed? == #{@status == :pass}"
         @status == :pass && !error?
