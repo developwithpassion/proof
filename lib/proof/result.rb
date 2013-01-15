@@ -8,4 +8,5 @@ module Proof
     def write
     end
   end
+  Result = ProofResult
 end

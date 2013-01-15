@@ -1,6 +1,6 @@
 require 'proof/description'
 require 'proof/extend'
-require 'proof/proof_result'
+require 'proof/result'
 require 'proof/execution'
 require 'proof/core_ext'
 require 'proof/proof'

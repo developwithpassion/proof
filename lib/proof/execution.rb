@@ -26,7 +26,7 @@ module Proof
         # line_detail = backtrace[0].gsub(/.*\/proofs\/proof\/(.*\.rb.*)/,'\1')
         # messsage = "(#{error.class}) \"#{error.message}\" at #{line_detail}"
       end
-      ProofResult.new(method, error)
+      Proof::Result.new method, error
       # Output.send method, messsage
 
       # if method == :error
