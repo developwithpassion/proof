@@ -1,22 +1,23 @@
 module Proof
   class Result
-    attr_reader :status,:error
-    def initialize(status, error = nil)
+    attr_reader :status
+    attr_reader :error
+
+    def initialize(status, error=nil)
       @status = status
       @error = error
     end
 
     def write
-      Output.send status, "#{Description.current}"
+      Output.send output_method, "#{Description.current}"
+      Error.output error if status == :error
+    end
 
+    def output_method
       if status == :error
-        backtrace = error.backtrace
-        line_detail = backtrace[0].gsub(/.*\/proofs\/proof\/(.*\.rb.*)/,'\1')
-        messsage = "(#{error.class}) \"#{error.message}\" at #{line_detail}"
-
-        backtrace.reject! {|l| l =~ /proof\/lib\/proof/ }
-        Output.backtrace backtrace.join("\n")
+        return :fail
       end
+      return status
     end
   end
 end
