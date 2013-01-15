@@ -12,22 +12,27 @@ module Proof
     end
 
     def backtrace
-      @backtrace ||= @error.backtrace
+      @backtrace ||= @error.backtrace.extend Backtrace
     end
 
     def output     
-      remove_proof_framework_frames
+      backtrace.remove_proof_framework_frames!
       Output.error error_message
-      Output.backtrace backtrace.join("\n")
-    end
-
-    def remove_proof_framework_frames
-      backtrace.reject! {|l| l =~ /proof\/lib\/proof/ }
+      Output.backtrace "  #{backtrace.join("\n  ")}"
     end
 
     def error_message
-      filename_and_line_number = backtrace[0].gsub(/.*\/proofs\/proof\/(.*\.rb.*)/,'\1')
-      "(#{error.class}) \"#{error.message}\" at #{filename_and_line_number}"
+      "(#{error.class}) \"#{error.message}\" at #{backtrace.first_frame}"
+    end
+
+    module Backtrace
+      def first_frame
+        first.gsub(/.*\/proofs\/proof\/(.*\.rb.*)/,'\1')
+      end
+
+      def remove_proof_framework_frames!
+        reject! {|l| l =~ /proof\/lib\/proof/ }
+      end
     end
   end
 end
