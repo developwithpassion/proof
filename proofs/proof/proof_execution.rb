@@ -4,37 +4,40 @@ require 'proof/proof_execution'
 
 include Proof::SketchStyle
 
-class ProofResult
-  module Proof
-    def error?
-      @error.nil?
+module Proof
+  class ProofResult
+    module Proof
+      def error?
+        @error.nil?
+      end
+      def passed?
+        Output.debug "passed? == #{@method == :pass}"
+        @method == :pass && !error?
+      end
+      def failed?
+        Output.debug "failed? == #{@method == :fail}"
+        @method == :fail && !error?
+      end 
+      def raised_an_error?
+        Output.debug "raised_an_error? == #{@method == :error}"
+        @method == :error && error?
+      end
+      def written?
+        Output.debug "Displayed the result == #{@written == true}"
+        @written
+      end
     end
-    def passed?
-      Output.debug "passed? == #{@method == :pass}"
-      @method == :pass && !error?
-    end
-    def failed?
-      Output.debug "failed? == #{@method == :fail}"
-      @method == :fail && !error?
-    end 
-    def raised_an_error?
-      Output.debug "raised_an_error? == #{@method == :error}"
-      @method == :error && error?
-    end
-    def written?
-      Output.debug "Displayed the result == #{@written == true}"
-      @written
+  end
+
+  def some_error
+    begin
+      raise 
+    rescue => error
+      error
     end
   end
 end
 
-def some_error
-  begin
-    raise 
-  rescue => error
-    error
-  end
-end
 
 proof 'Runs a passing proof' do
   execution = ProofExecution.new
