@@ -1,4 +1,6 @@
 module Proof
+  extend self
+  
   def proof(description = '',&block)
     desc description
     Proof.begin
@@ -18,11 +20,6 @@ module Proof
   def heading(heading='')
     Output.info "\n#{heading}"
   end
-
-
-
-
-
 
   def description
     @description
