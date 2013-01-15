@@ -17,16 +17,16 @@ module Proof
       error = nil
       begin
         result = obj_under_test.instance_eval &blk
-        method = result ? :pass : :fail
+        status = result ? :pass : :fail
         messsage = Proof::Description.current
       rescue => error
-        method = :error
+        status = :error
 
         # backtrace = error.backtrace
         # line_detail = backtrace[0].gsub(/.*\/proofs\/proof\/(.*\.rb.*)/,'\1')
         # messsage = "(#{error.class}) \"#{error.message}\" at #{line_detail}"
       end
-      Proof::Result.new method, error
+      Proof::Result.new status, error
       # Output.send method, messsage
 
       # if method == :error

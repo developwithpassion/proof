@@ -1,12 +1,11 @@
 module Proof
-  class ProofResult
-    def initialize(method, error = nil)
-      @method = method
+  class Result
+    def initialize(status, error = nil)
+      @status = status
       @error = error
     end
 
     def write
     end
   end
-  Result = ProofResult
 end
