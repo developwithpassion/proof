@@ -9,12 +9,11 @@ module Proof
             def prove(&blk)
               obj_under_test = self
 
-              Proof::Extension.into obj_under_test
+              Proof::Extend.into obj_under_test
 
               # TODO
               # Proof:Extension.run obj_under_test, blk
-              # where .run is a class method that builds the instance using build library
-              
+              # where .run is a class method that builds the instance using build library              
               execution = ProofExecution.new
               execution.obj_under_test = obj_under_test
               execution.blk = blk

@@ -1,5 +1,5 @@
 require 'proof/description'
-require 'proof/extension'
+require 'proof/extend'
 require 'proof/proof_result'
 require 'proof/proof_execution'
 require 'proof/core_ext'
