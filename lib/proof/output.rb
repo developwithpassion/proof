@@ -1,17 +1,14 @@
 module Proof
   class Output
+    attr_accessor :info_logger
     attr_accessor :pass_logger
     attr_accessor :fail_logger
     attr_accessor :error_logger
+    attr_accessor :backtrace_logger
     attr_accessor :details_logger
-    attr_accessor :info_logger
 
     def self.instance
       @instance ||= new
-    end
-
-    def self.pass(text)
-      instance.pass text
     end
 
     def self.info(text)
@@ -21,6 +18,10 @@ module Proof
     def info(text)
       @info_logger.info text
       text
+    end
+
+    def self.pass(text)
+      instance.pass text
     end
 
     def pass(text)
@@ -43,6 +44,15 @@ module Proof
 
     def error(text)
       @error_logger.debug text
+      text
+    end
+
+    def self.backtrace(text)
+      instance.backtrace text
+    end
+
+    def backtrace(text)
+      @backtrace_logger.debug text
       text
     end
 
