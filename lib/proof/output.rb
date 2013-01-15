@@ -3,7 +3,7 @@ module Proof
     attr_accessor :pass_logger
     attr_accessor :fail_logger
     attr_accessor :error_logger
-    attr_accessor :debug_logger
+    attr_accessor :details_logger
     attr_accessor :info_logger
 
     def self.instance
@@ -46,12 +46,12 @@ module Proof
       text
     end
 
-    def self.debug(text)
-      instance.debug text
+    def self.details(text)
+      instance.details text
     end
 
-    def debug(text)
-      @debug_logger.debug text
+    def details(text)
+      @details_logger.debug text
       text
     end
   end

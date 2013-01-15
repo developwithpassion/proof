@@ -17,16 +17,16 @@ module Proof
 
     def extend_obj
       if extension.nil?
-        Output.debug "#{mod.name} not extended by #{extension_name}"
+        Output.details "#{mod.name} not extended by #{extension_name}"
         return false
       end
 
       if obj_under_test.is_a? extension
-        Output.debug "#{mod.name} is already extended by #{extension_name}"
+        Output.details "#{mod.name} is already extended by #{extension_name}"
         return false
       end
 
-      Output.debug "Extending #{extension_name} into #{mod.name}"
+      Output.details "Extending #{extension_name} into #{mod.name}"
       obj_under_test.extend extension
 
       true
@@ -35,10 +35,10 @@ module Proof
     def extension
       return @extension if @extension
 
-      Output.debug "#{mod.name} has #{defined ? '' : 'no '}inner Proof"
+      Output.details "#{mod.name} has #{defined ? '' : 'no '}inner Proof"
       return nil unless defined
       
-      Output.debug "Getting constant #{mod.name}::Proof"
+      Output.details "Getting constant #{mod.name}::Proof"
       @extension ||= mod.const_get :Proof, search_ancestors=false
     end
 
