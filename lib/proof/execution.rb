@@ -1,7 +1,17 @@
 module Proof
-  class ProofExecution
-    attr_accessor :obj_under_test
-    attr_accessor :blk
+  class Execution
+    attr_reader :obj_under_test
+    attr_reader :blk
+
+    def self.run(obj_under_test, blk)
+      instance = new obj_under_test, blk
+      instance.run
+    end
+
+    def initialize(obj_under_test, blk)
+      @obj_under_test = obj_under_test
+      @blk = blk
+    end
 
     def run
       error = nil
