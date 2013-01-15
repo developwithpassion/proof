@@ -1,12 +1,10 @@
 module Proof
-  extend self
-
   def proof(description=nil, &block)
     Proof::Description.current = description
     Proof.begin
     yield
     Proof.end
-    desc nil
+    Proof::Description.current = nil
   end
 
   def desc(description)

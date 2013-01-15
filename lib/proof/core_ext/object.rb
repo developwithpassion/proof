@@ -8,11 +8,13 @@ module Proof
           ::Object.class_eval do
             def prove(&blk)
               obj_under_test = self
-              proof_module = Proof::Extension.proof_module(obj_under_test)
 
-              ## TODO only if a proof module is found. need a guard.
-              obj_under_test.extend proof_module
+              Proof::Extension.into obj_under_test
 
+              # TODO
+              # Proof:Extension.run obj_under_test, blk
+              # where .run is a class method that builds the instance using build library
+              
               execution = ProofExecution.new
               execution.obj_under_test = obj_under_test
               execution.blk = blk
