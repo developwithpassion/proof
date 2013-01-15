@@ -1,22 +1,22 @@
 require_relative '../proofs_init'
 
 module Proof
-  class ProofResult
+  class Result
     module Proof
       def error?
-        @error.nil?
+        !@error.nil?
       end
       def passed?
-        Output.details "passed? == #{@method == :pass}"
-        @method == :pass && !error?
+        Output.details "passed? == #{@status == :pass}"
+        @status == :pass && !error?
       end
       def failed?
-        Output.details "failed? == #{@method == :fail}"
-        @method == :fail && !error?
+        Output.details "failed? == #{@status == :fail}"
+        @status == :fail && !error?
       end 
       def raised_an_error?
-        Output.details "raised_an_error? == #{@method == :error}"
-        @method == :error && error?
+        Output.details "raised_an_error? == #{@status == :error}"
+        @status == :error && error?
       end
       def written?
         Output.details "Displayed the result == #{@written == true}"
