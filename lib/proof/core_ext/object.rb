@@ -8,7 +8,7 @@ module Proof
           ::Object.class_eval do
             def prove(&blk)
               obj_under_test = self
-              proof_module = Proof::proof_module(obj_under_test)
+              proof_module = Proof.proof_module(obj_under_test)
               obj_under_test.extend proof_module
 
               execution = ProofExecution.new

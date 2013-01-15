@@ -1,8 +1,6 @@
 require_relative '../proofs_init'
 
-include Proof::SketchStyle
-
-Proof::begin
+Proof.begin
 
 
 desc 'Errors are output'

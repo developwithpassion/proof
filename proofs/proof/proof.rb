@@ -1,8 +1,6 @@
 require_relative '../proofs_init'
 require 'proof/thing'
 
-include Proof::SketchStyle
-
 class Thing
   module Proof
     def some_method

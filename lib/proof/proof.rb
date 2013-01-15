@@ -1,5 +1,29 @@
 module Proof
-  extend self
+  def proof(description = '',&block)
+    desc description
+    Proof.begin
+    yield
+    Proof.end
+    desc nil
+  end
+
+  def desc(description = '')
+    Proof.description = description
+  end
+
+  def comment(comment='')
+    Output.info comment
+  end
+
+  def heading(heading='')
+    Output.info "\n#{heading}"
+  end
+
+
+
+
+
+
   def description
     @description
   end
@@ -20,5 +44,4 @@ module Proof
     mod = obj_under_test.class == Module ? obj_under_test : obj_under_test.class
     mod.const_get :Proof
   end
-
 end
