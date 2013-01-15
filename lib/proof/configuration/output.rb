@@ -51,7 +51,7 @@ module Proof
 
         error_appender = error_appender_type.new(
           name = 'error_appender',
-          proof_layout_opts.merge(error_appender_options)
+          info_layout_opts.merge(error_appender_options)
         )
 
         backtrace_appender = backtrace_appender_type.new(
