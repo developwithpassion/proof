@@ -1,3 +1,4 @@
+require 'proof/description'
 require 'proof/proof_result'
 require 'proof/proof_execution'
 require 'proof/core_ext'

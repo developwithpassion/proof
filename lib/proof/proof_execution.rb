@@ -8,7 +8,7 @@ module Proof
       begin
         result = obj_under_test.instance_eval &blk
         method = result ? :pass : :fail
-        messsage = Proof.description
+        messsage = Proof::Description.current
       rescue => error
         method = :error
 

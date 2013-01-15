@@ -1,4 +1,4 @@
-class Thing
+class ::Thing
   def some_method
     puts 'Hi from some method'
   end
