@@ -54,7 +54,7 @@ module Proof
           proof_layout_opts.merge(error_appender_options)
         )
 
-        backtrace_appender = details_appender_type.new(
+        backtrace_appender = backtrace_appender_type.new(
           name = 'backtrace_appender',
           info_layout_opts.merge(backtrace_appender_options)
         )
