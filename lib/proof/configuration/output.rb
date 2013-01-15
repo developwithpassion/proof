@@ -26,8 +26,7 @@ module Proof
         backtrace_appender_options = { :level => :debug }
 
         details_appender_type = Logging::Appenders::Stdout
-        details_appender_options = { :level => :debug }
-        # details_appender_options = { :level => :info }
+        details_appender_options = { :level => :info }
 
         proof_layout = layout_type.new(proof_result_layout_options)
         proof_layout_opts = { :layout => proof_layout }
