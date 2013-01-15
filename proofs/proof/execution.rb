@@ -36,7 +36,7 @@ end
 
 def execution(blk)
   obj_under_test = Object.new
-  execution = Proof::Execution.new obj_under_test, blk
+  execution = Proof::Execution.new 'Some description', obj_under_test, blk
 end
 
 proof 'Passes' do

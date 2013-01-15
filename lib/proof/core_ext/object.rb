@@ -9,7 +9,7 @@ module Proof
             def prove(&blk)
               obj_under_test = self
               Proof::Extend.into obj_under_test
-              result = Proof::Execution.run obj_under_test, blk
+              result = Proof::Execution.run Description.current, obj_under_test, blk
               result.write
             end
           end
