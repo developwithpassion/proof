@@ -12,8 +12,6 @@ module Proof
       Proof::description = description
     end
 
-    # TODO
-    # Use Output.write
     def comment(comment='')
       Output.info comment
     end

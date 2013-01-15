@@ -1,6 +1,6 @@
 require_relative '../proofs_init'
 
-include Proof::SketchStyle
+# include Proof::SketchStyle
 
 module Proof
   class ProofResult
@@ -35,7 +35,6 @@ module Proof
     end
   end
 end
-
 
 proof 'Passes' do
 
