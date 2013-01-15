@@ -21,7 +21,6 @@ module Proof
         messsage = Proof::Description.current
       rescue => error
         status = :error
-
         # backtrace = error.backtrace
         # line_detail = backtrace[0].gsub(/.*\/proofs\/proof\/(.*\.rb.*)/,'\1')
         # messsage = "(#{error.class}) \"#{error.message}\" at #{line_detail}"
