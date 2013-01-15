@@ -18,18 +18,11 @@ module Proof
     def extend_obj
       if extension.nil?
         Output.details "#{mod.name} not extended by #{extension_name}"
-        return false
-      end
-
-      if obj_under_test.is_a? extension
-        Output.details "#{mod.name} is already extended by #{extension_name}"
-        return false
+        return obj_under_test
       end
 
       Output.details "Extending #{extension_name} into #{mod.name}"
       obj_under_test.extend extension
-
-      true
     end
 
     def extension
