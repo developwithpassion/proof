@@ -3,6 +3,7 @@ module Proof
     class Output
       include Single
       include Setter
+      include Proof::Namespace
 
       attr_accessor :info_logger
       attr_accessor :pass_logger
@@ -12,19 +13,20 @@ module Proof
       attr_accessor :details_logger
 
       def configure
-        Logging.appenders.stdout(
-          :layout => Logging.layouts.pattern(:pattern => '%m\n')
-        )
+        layout = Logging.layouts.pattern(:pattern => '%m\n')
+        stdout_appender = Logging::Appenders::Stdout.new('stdout', :layout => layout)
 
-        Logging.logger.root.level = :info
-        Logging.logger.root.appenders = Logging.appenders.stdout
+        logger = Logging.logger[root_namespace]
+        logger.appenders = stdout_appender
+        logger.level = :info
 
-        self.info_logger = Logging.logger['Info']
-        self.pass_logger = Logging.logger['Pass']
-        self.fail_logger = Logging.logger['Fail']
-        self.error_logger = Logging.logger['Error']
-        self.backtrace_logger = Logging.logger['Backtrace']
-        self.details_logger = Logging.logger['details']
+        root = root_namespace
+        self.info_logger = Logging.logger[namespace(root, 'Info')]
+        self.pass_logger = Logging.logger[namespace(root, 'Pass')]
+        self.fail_logger = Logging.logger[namespace(root, 'Fail')]
+        self.error_logger = Logging.logger[namespace(root, 'Error')]
+        self.backtrace_logger = Logging.logger[namespace(root, 'Backtrace')]
+        self.details_logger = Logging.logger[namespace(root, 'Details')]
 
         set Proof::Output.instance
       end

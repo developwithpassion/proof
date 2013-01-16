@@ -2,6 +2,7 @@ require 'logging'
 require 'single'
 require 'setter'
 
+require 'proof/namespace'
 require 'proof/description'
 require 'proof/extend'
 require 'proof/result'
