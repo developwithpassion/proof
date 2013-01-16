@@ -24,52 +24,43 @@ module Proof
     # - Each call to the "logger" macro records the logger info
     # in the class's list of loggers, which is used for operations
     # that operate on all loggers (eg: output.level = :debug, output.enable_loggers, output.disable)
-    # logger :info, :level => :info
-    # logger :pass, :level => :info
-    # logger :fail, :level => :info
-    # logger :error, :level => :warn
-    # logger :backtrace, :level => :error
-    # logger :details_logger, :level => :debug
+    def logger(name,options = {},&transform_block)
+      transform = transform_block if block_given?
+      transform = transform || ->(message){ message } 
+      level = options.fetch(:level,:info)
+      logger_name = "#{name}_logger"
 
-    setting :info_logger
-    setting :pass_logger
-    setting :fail_logger
-    setting :error_logger
-    setting :backtrace_logger
-    setting :details_logger
+      self.class.setting logger_name
+
+      self.class.send :define_method,name do |log_message|
+        log_message = transform.call log_message
+        logger = send logger_name
+        logger.send level, log_message
+        log_message
+      end
+    end
+
+    logger :info, :level => :info
+
+    logger :pass, :level => :info do |text|
+      "Pass: #{text}"
+    end
+
+    logger :fail, :level => :info do |text|
+      "Fail: #{text}"
+    end
+
+    logger :error, :level => :warn do |text|
+      "Error: #{text}"
+    end
+
+    logger :backtrace, :level => :error
+    logger :details, :level => :debug
+
 
     def write(method, description)
       send method, description
     end
 
-    def info(text)
-      info_logger.info text
-      text
-    end
-
-    def pass(text)
-      pass_logger.info "Pass: #{text}"
-      text
-    end
-
-    def fail(text)
-      fail_logger.info "Fail: #{text}"
-      text
-    end
-
-    def error(text)
-      error_logger.warn "Error: #{text}"
-      text
-    end
-
-    def backtrace(text)
-      backtrace_logger.error text
-      text
-    end
-
-    def details(text)
-      details_logger.debug text
-      text
-    end
   end
 end
