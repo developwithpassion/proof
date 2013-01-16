@@ -25,7 +25,7 @@ module Proof
     end
 
     def pass(text)
-      @pass_logger.info text
+      @pass_logger.info "Pass: #{text}"
       text
     end
 
@@ -34,7 +34,7 @@ module Proof
     end
 
     def fail(text)
-      @fail_logger.error text
+      @fail_logger.error "Fail: #{text}"
       text
     end
 
