@@ -2,7 +2,8 @@ require_relative '../proofs_init'
 
 Proof.begin
 
-desc 'Error and backtrace are output'
-item = Object.new
+proof 'Error and backtrace are output' do
+  item = Object.new
 
-item.prove { raise 'This is an error' }
+  item.prove { raise 'This is an error' }
+end

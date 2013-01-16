@@ -1,8 +1,9 @@
 module Proof
   class Output
+    include Single
+    include Setter::Settings
 
     # TODO settings
-    # TODO single
     # TODO def level=(level:Symbol) (sets all logger levels)
     # TODO def levels=(levels:Hash) (sets logger levels specified in hash)
     # TODO def default_levels (sets logger levels to default levels)
@@ -17,76 +18,44 @@ module Proof
     # output.backtrace_logger.level = :error
     # output.details_logger.level = :debug        
 
-    attr_accessor :info_logger
-    attr_accessor :pass_logger
-    attr_accessor :fail_logger
-    attr_accessor :error_logger
-    attr_accessor :backtrace_logger
-    attr_accessor :details_logger
-
-    def self.instance
-      @instance ||= new
-    end
-
-    def self.write(method, description)
-      instance.write method, description
-    end
+    setting :info_logger
+    setting :pass_logger
+    setting :fail_logger
+    setting :error_logger
+    setting :backtrace_logger
+    setting :details_logger
 
     def write(method, description)
       send method, description
     end
 
-    def self.info(text)
-      instance.info text
-    end
-
     def info(text)
-      @info_logger.info text
+      info_logger.info text
       text
-    end
-
-    def self.pass(text)
-      instance.pass text
     end
 
     def pass(text)
-      @pass_logger.info "Pass: #{text}"
+      pass_logger.info "Pass: #{text}"
       text
-    end
-
-    def self.fail(text)
-      instance.fail text
     end
 
     def fail(text)
-      @fail_logger.info "Fail: #{text}"
+      fail_logger.info "Fail: #{text}"
       text
-    end
-
-    def self.error(text)
-      instance.error text
     end
 
     def error(text)
-      @error_logger.warn text
+      error_logger.warn "Error: #{text}"
       text
-    end
-
-    def self.backtrace(text)
-      instance.backtrace text
     end
 
     def backtrace(text)
-      @backtrace_logger.error text
+      backtrace_logger.error text
       text
     end
 
-    def self.details(text)
-      instance.details text
-    end
-
     def details(text)
-      @details_logger.debug text
+      details_logger.debug text
       text
     end
   end

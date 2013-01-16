@@ -1,3 +1,7 @@
+require 'logging'
+require 'single'
+require 'setter'
+
 require 'proof/description'
 require 'proof/extend'
 require 'proof/result'
