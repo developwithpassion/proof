@@ -27,6 +27,10 @@ module Proof
     setting :backtrace_logger
     setting :details_logger
 
+    def write(method, description)
+      send method, description
+    end
+
     def info(text)
       info_logger.info text
       text
