@@ -1,5 +1,3 @@
-require 'setter'
-
 module Proof
   class Output
     include Single
