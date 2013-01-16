@@ -1,3 +1,4 @@
+require 'logging'
 require 'single'
 
 require 'proof/description'

@@ -1,5 +1,3 @@
-require 'logging'
-
 module Proof
   module Configuration
     module Output
