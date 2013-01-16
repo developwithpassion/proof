@@ -24,12 +24,12 @@ module Proof
     # - Each call to the "logger" macro records the logger info
     # in the class's list of loggers, which is used for operations
     # that operate on all loggers (eg: output.level = :debug, output.enable_loggers, output.disable)
-    logger :info, :level => :info
-    logger :pass, :level => :info
-    logger :fail, :level => :info
-    logger :error, :level => :warn
-    logger :backtrace, :level => :error
-    logger :details_logger, :level => :debug
+    # logger :info, :level => :info
+    # logger :pass, :level => :info
+    # logger :fail, :level => :info
+    # logger :error, :level => :warn
+    # logger :backtrace, :level => :error
+    # logger :details_logger, :level => :debug
 
     setting :info_logger
     setting :pass_logger
