@@ -1,5 +1,5 @@
 require_relative '../proofs_init'
-require 'proof/thing'
+require_relative 'thing'
 
 class Thing
   module Proof

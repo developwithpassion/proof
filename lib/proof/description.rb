@@ -1,15 +1,7 @@
 module Proof
   class Description
-    def current
-      @current ||= ''
-    end
-    
-    def self.current=(val)
-      @current = val
-    end
+    include Single
 
-    def self.current
-      @current
-    end
+    attr_accessor :current
   end
 end

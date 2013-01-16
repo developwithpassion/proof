@@ -13,7 +13,7 @@ module Proof
         Logging.logger.root.level = :info
         Logging.logger.root.appenders = Logging.appenders.stdout
 
-        output = Proof::Output.instance
+        output = Proof::Output
 
         output.info_logger = Logging.logger['Info']
         output.pass_logger = Logging.logger['Pass']

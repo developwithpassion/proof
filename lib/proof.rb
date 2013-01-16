@@ -1,3 +1,5 @@
+require 'single'
+
 require 'proof/description'
 require 'proof/extend'
 require 'proof/result'

@@ -31,7 +31,7 @@ module Proof
       end
 
       def remove_proof_framework_frames!
-        reject! {|l| l =~ /proof\/lib\/proof/ }
+        reject! {|backtrace_line| backtrace_line =~ /proof\/lib\/proof/ }
       end
     end
   end
