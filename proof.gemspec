@@ -12,7 +12,6 @@ Gem::Specification.new do |s|
   s.require_paths = ['lib']
   s.files = Dir.glob('{lib}/**/*')
 
-  s.add_dependency 'path_gem'
   s.add_dependency 'logging'
 end
 
