@@ -1,5 +1,22 @@
 module Proof
   class Output
+
+    # TODO settings
+    # TODO single
+    # TODO def level=(level:Symbol) (sets all logger levels)
+    # TODO def levels=(levels:Hash) (sets logger levels specified in hash)
+    # TODO def default_levels (sets logger levels to default levels)
+    # TODO def activate(logger_names:[Symbol] or Symbol) (sets loggers to level where it writes)
+    # TODO def deactivate(logger_names:[Symbol] or Symbol) (sets logger to level where it doesn't write)
+
+    # This turns on all loggers
+    # output.info_logger.level = :info
+    # output.pass_logger.level = :info
+    # output.fail_logger.level = :info
+    # output.error_logger.level = :warn
+    # output.backtrace_logger.level = :error
+    # output.details_logger.level = :debug        
+
     attr_accessor :info_logger
     attr_accessor :pass_logger
     attr_accessor :fail_logger
@@ -34,7 +51,7 @@ module Proof
     end
 
     def fail(text)
-      @fail_logger.error "Fail: #{text}"
+      @fail_logger.info "Fail: #{text}"
       text
     end
 
@@ -43,7 +60,7 @@ module Proof
     end
 
     def error(text)
-      @error_logger.debug text
+      @error_logger.warn text
       text
     end
 
@@ -52,7 +69,7 @@ module Proof
     end
 
     def backtrace(text)
-      @backtrace_logger.debug text
+      @backtrace_logger.error text
       text
     end
 
