@@ -11,7 +11,7 @@ module Proof
     end
 
     def write
-      Output.send output_method, description
+      Output.instance.send output_method, description
       Error.output error if status == :error
     end
 

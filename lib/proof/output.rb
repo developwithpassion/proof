@@ -1,6 +1,9 @@
+require 'setter'
+
 module Proof
   class Output
     include Single
+    include Setter::Settings
 
     # TODO settings
     # TODO def level=(level:Symbol) (sets all logger levels)
@@ -17,40 +20,40 @@ module Proof
     # output.backtrace_logger.level = :error
     # output.details_logger.level = :debug        
 
-    attr_accessor :info_logger
-    attr_accessor :pass_logger
-    attr_accessor :fail_logger
-    attr_accessor :error_logger
-    attr_accessor :backtrace_logger
-    attr_accessor :details_logger
+    setting :info_logger
+    setting :pass_logger
+    setting :fail_logger
+    setting :error_logger
+    setting :backtrace_logger
+    setting :details_logger
 
     def info(text)
-      @info_logger.info text
+      info_logger.info text
       text
     end
 
     def pass(text)
-      @pass_logger.info "Pass: #{text}"
+      pass_logger.info "Pass: #{text}"
       text
     end
 
     def fail(text)
-      @fail_logger.info "Fail: #{text}"
+      fail_logger.info "Fail: #{text}"
       text
     end
 
     def error(text)
-      @error_logger.warn "Error: #{text}"
+      error_logger.warn "Error: #{text}"
       text
     end
 
     def backtrace(text)
-      @backtrace_logger.error text
+      backtrace_logger.error text
       text
     end
 
     def details(text)
-      @details_logger.debug text
+      details_logger.debug text
       text
     end
   end
