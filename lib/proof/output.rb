@@ -28,6 +28,14 @@ module Proof
       @instance ||= new
     end
 
+    def self.write(method, description)
+      instance.write method, description
+    end
+
+    def write(method, description)
+      send method, description
+    end
+
     def self.info(text)
       instance.info text
     end
