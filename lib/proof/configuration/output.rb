@@ -39,10 +39,10 @@ module Proof
         self.details_logger = create_writer namespace(root, 'Details')
       end
 
-      def create_writer(writer_name,level = :debug)
-        Writer.new(Logging.logger[writer_name],level)
+      def create_writer(writer_name, level = :debug)
+        logger = Logging.logger[writer_name]
+        writer = Writer.new(logger, level)
       end
-
       configure
     end
   end

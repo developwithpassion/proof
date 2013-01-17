@@ -9,18 +9,8 @@ def create_writer
   Writer.new logger,default_level
 end
 
-module Proof
-  class Writer
-    module Proof
-      def enabled?
-        @enabled
-      end
-    end
-  end
-end
-
 proof 'Initially enabled' do
-  object_under_test = create_writer
+  writer = create_writer
 
-  object_under_test.prove { enabled? }
+  writer.prove { enabled? }
 end

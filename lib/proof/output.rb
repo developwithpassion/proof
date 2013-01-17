@@ -8,16 +8,10 @@ module Proof
     # TODO def level=(level:Symbol) (sets all logger levels)
     # TODO def levels=(levels:Hash) (sets logger levels specified in hash)
     # TODO def default_levels (sets logger levels to default levels)
+    #
     # TODO def activate(logger_names:[Symbol] or Symbol) (sets loggers to level where it writes)
     # TODO def deactivate(logger_names:[Symbol] or Symbol) (sets logger to level where it doesn't write)
 
-    # This turns on all loggers
-    # output.info_logger.level = :info
-    # output.pass_logger.level = :info
-    # output.fail_logger.level = :info
-    # output.error_logger.level = :warn
-    # output.backtrace_logger.level = :error
-    # output.details_logger.level = :debug        
 
     # - These generate "#{logger_name}_logger" settings
     # - The :level option is the level set on the logger,
@@ -54,7 +48,11 @@ module Proof
     # broadcast :disable do
     #   writers
     # end
+
     def self.disable
+      writers.disable
+    end
+    def self.level=
       writers.disable
     end
   

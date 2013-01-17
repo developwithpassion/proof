@@ -4,7 +4,7 @@ module Proof
     attr_reader :default_level
     attr_reader :enabled
 
-    def initialize(logger,default_level)
+    def initialize(logger, default_level)
       @logger = logger
       @default_level = default_level
       enable
@@ -18,9 +18,12 @@ module Proof
       @enabled = true
     end
 
+    def enabled?
+      @enabled
+    end
 
-    def method_missing(method_id,*args,&block)
-      logger.send method_id,*args,&block if enabled
+    def write(logging_method, message)
+      logger.send logging_method, message if enabled?
     end
   end
 end
