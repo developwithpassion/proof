@@ -1,21 +1,26 @@
 module Proof
   class Writer
     attr_reader :logger
-    attr_reader :level
-    attr_reader :disabled
+    attr_reader :default_level
+    attr_reader :enabled
 
-    def initialize(logger,level)
+    def initialize(logger,default_level)
       @logger = logger
-      @level = level
-      @disabled = false
+      @default_level = default_level
+      enable
     end
 
     def disable
-      @disabled = true
+      @enabled = false
     end
 
+    def enable
+      @enabled = true
+    end
+
+
     def method_missing(method_id,*args,&block)
-      logger.send method_id,*args,&block unless disabled
+      logger.send method_id,*args,&block if enabled
     end
   end
 end
