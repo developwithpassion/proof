@@ -2,6 +2,7 @@ module Proof
   class Output
     include Single
     include Setter::Settings
+    include WriterCreation
 
     # TODO settings
     # TODO def level=(level:Symbol) (sets all logger levels)
@@ -24,47 +25,32 @@ module Proof
     # - Each call to the "logger" macro records the logger info
     # in the class's list of loggers, which is used for operations
     # that operate on all loggers (eg: output.level = :debug, output.enable_loggers, output.disable)
-    def generate_setting(setting_name)
-      self.class.setting setting_name
-    end
 
-    def logger(name,options = {},&transform_block)
-      transform = transform_block if block_given?
-      transform = transform || ->(message){ message } 
-      level = options.fetch(:level,:info)
-      logger_accessor_name = "#{name}_logger"
+    writer :info, :level => :info
 
-      generate_setting logger_accessor_name
-
-      self.class.send :define_method,name do |log_message|
-        log_message = transform.call log_message
-        logger = send logger_accessor_name
-        logger.send level, log_message
-        log_message
-      end
-    end
-
-    logger :info, :level => :info
-
-    logger :pass, :level => :info do |text|
+    writer :pass, :level => :info do |text|
       "Pass: #{text}"
     end
 
-    logger :fail, :level => :info do |text|
+    writer :fail, :level => :info do |text|
       "Fail: #{text}"
     end
 
-    logger :error, :level => :warn do |text|
+    writer :error, :level => :warn do |text|
       "Error: #{text}"
     end
 
-    logger :backtrace, :level => :error
-    logger :details, :level => :debug
+    writer :backtrace, :level => :error
+    writer :details, :level => :debug
 
 
     def write(method, description)
       send method, description
     end
 
+
+    def self.disable
+      writers.disable
+    end
   end
 end
