@@ -49,7 +49,7 @@ module Proof
       send method, description
     end
 
-    delegates :disable do
+    broadcast :disable do
       writers
     end
   end
