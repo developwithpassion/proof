@@ -24,17 +24,21 @@ module Proof
     # - Each call to the "logger" macro records the logger info
     # in the class's list of loggers, which is used for operations
     # that operate on all loggers (eg: output.level = :debug, output.enable_loggers, output.disable)
+    def generate_setting(setting_name)
+      self.class.setting setting_name
+    end
+
     def logger(name,options = {},&transform_block)
       transform = transform_block if block_given?
       transform = transform || ->(message){ message } 
       level = options.fetch(:level,:info)
-      logger_name = "#{name}_logger"
+      logger_accessor_name = "#{name}_logger"
 
-      self.class.setting logger_name
+      generate_setting logger_accessor_name
 
       self.class.send :define_method,name do |log_message|
         log_message = transform.call log_message
-        logger = send logger_name
+        logger = send logger_accessor_name
         logger.send level, log_message
         log_message
       end
