@@ -3,6 +3,7 @@ module Proof
     include Single
     include Setter::Settings
     include WriterCreation
+    include Delegation
 
     # TODO settings
     # TODO def level=(level:Symbol) (sets all logger levels)
@@ -48,9 +49,8 @@ module Proof
       send method, description
     end
 
-
-    def self.disable
-      writers.disable
+    delegates :disable do
+      writers
     end
   end
 end

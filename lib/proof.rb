@@ -3,6 +3,7 @@ require 'single'
 require 'setter'
 
 require 'proof/namespace'
+require 'proof/delegation'
 require 'proof/description'
 require 'proof/extend'
 require 'proof/result'
