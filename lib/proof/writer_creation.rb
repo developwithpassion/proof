@@ -6,7 +6,7 @@ module Proof
 
     module ClassMethods
       def writers
-        @writers ||= []
+        @writers ||= [].extend Proof::Writers
       end
 
       def generate_write_method(name, writer_accessor_name, level, transform)

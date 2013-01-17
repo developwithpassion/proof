@@ -3,7 +3,6 @@ module Proof
     include Single
     include Setter::Settings
     include WriterCreation
-    include Delegation
 
     # TODO settings
     # TODO def level=(level:Symbol) (sets all logger levels)
@@ -49,8 +48,15 @@ module Proof
       send method, description
     end
 
-    broadcast :disable do
-      writers
+  
+    # Messing around with a dispatch macro to not need to create wrapper methods
+    # or modules
+    # broadcast :disable do
+    #   writers
+    # end
+    def self.disable
+      writers.disable
     end
+  
   end
 end
