@@ -31,18 +31,14 @@ module Proof
       def initialize_writers
         root = root_namespace
 
-        self.info_logger = create_writer namespace(root, 'Info')
-        self.pass_logger = create_writer namespace(root, 'Pass')
-        self.fail_logger = create_writer namespace(root, 'Fail')
-        self.error_logger = create_writer namespace(root, 'Error')
-        self.backtrace_logger = create_writer namespace(root, 'Backtrace')
-        self.details_logger = create_writer namespace(root, 'Details')
+        self.info_logger = ::Output::Writer.build namespace(root, 'Info')
+        self.pass_logger = ::Output::Writer.build namespace(root, 'Pass')
+        self.fail_logger = ::Output::Writer.build namespace(root, 'Fail')
+        self.error_logger = ::Output::Writer.build namespace(root, 'Error')
+        self.backtrace_logger = ::Output::Writer.build namespace(root, 'Backtrace')
+        self.details_logger = ::Output::Writer.build namespace(root, 'Details')
       end
 
-      def create_writer(writer_name, level = :debug)
-        logger = Logging.logger[writer_name]
-        writer = Writer.new(logger, level)
-      end
       configure
     end
   end

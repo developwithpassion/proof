@@ -6,7 +6,7 @@ def create_writer
   logger = Object.new
   default_level = :info
   
-  Writer.new logger,default_level
+  ::Output::Writer.new logger,default_level
 end
 
 proof 'Initially enabled' do

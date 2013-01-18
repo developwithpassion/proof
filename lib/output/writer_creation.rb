@@ -1,12 +1,15 @@
-module Proof
+module Output
   module WriterCreation
     def self.included(base)
+      base.extend ClassMethods
+    end
+    def self.extended(base)
       base.extend ClassMethods
     end
 
     module ClassMethods
       def writers
-        @writers ||= [].extend Proof::Writers
+        @writers ||= [].extend Writers
       end
 
       def define_write_method(name, writer_accessor_name, level, transform)

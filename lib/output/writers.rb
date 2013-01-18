@@ -1,4 +1,4 @@
-module Proof
+module Output
   module Writers
     def disable
       each do |writer|

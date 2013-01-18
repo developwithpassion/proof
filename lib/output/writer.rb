@@ -1,4 +1,4 @@
-module Proof
+module Output
   class Writer
     attr_reader :logger
     attr_reader :default_level
@@ -8,6 +8,11 @@ module Proof
       @logger = logger
       @default_level = default_level
       enable
+    end
+
+    def self.build(writer_name, level = :debug)
+      logger = Logging.logger[writer_name]
+      writer = new logger, level
     end
 
     def disable

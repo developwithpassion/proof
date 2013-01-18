@@ -1,8 +1,9 @@
 module Proof
   class Output
-    include Single
-    include Setter::Settings
-    include WriterCreation
+    include ::Output::OutputBase
+    # include Single
+    # include Setter::Settings
+    # include WriterCreation
 
     # TODO settings
     # TODO def level=(level:Symbol) (sets all logger levels)
@@ -36,25 +37,5 @@ module Proof
 
     writer :backtrace, :level => :error
     writer :details, :level => :debug
-
-
-    def write(method, description)
-      send method, description
-    end
-
-  
-    # Messing around with a dispatch macro to not need to create wrapper methods
-    # or modules
-    # broadcast :disable do
-    #   writers
-    # end
-
-    def self.disable
-      writers.disable
-    end
-    def self.level=
-      writers.disable
-    end
-  
   end
 end
