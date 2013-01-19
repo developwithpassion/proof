@@ -1,6 +1,7 @@
 require 'logging'
 require 'single'
 require 'setter'
+require 'output'
 
 require 'proof/namespace'
 require 'proof/description'
