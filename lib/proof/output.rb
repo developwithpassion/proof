@@ -1,6 +1,8 @@
 module Proof
   class Output
-    include ::Output::OutputBase
+    include Single
+    include Setter::Settings
+    include ::Output
 
     # TODO settings
     # TODO def level=(level:Symbol) (sets all logger levels)
