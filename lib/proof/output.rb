@@ -4,21 +4,7 @@ module Proof
     include Setter::Settings
     include ::Output
 
-    # TODO settings
-    # TODO def level=(level:Symbol) (sets all logger levels)
-    # TODO def levels=(levels:Hash) (sets logger levels specified in hash)
-    # TODO def default_levels (sets logger levels to default levels)
-    #
-    # TODO def activate(logger_names:[Symbol] or Symbol) (sets loggers to level where it writes)
-    # TODO def deactivate(logger_names:[Symbol] or Symbol) (sets logger to level where it doesn't write)
-
-
-    # - These generate "#{logger_name}_logger" settings
-    # - The :level option is the level set on the logger,
-    # and it's the "threshold" for enabling the logger to write
-    # - Each call to the "logger" macro records the logger info
-    # in the class's list of loggers, which is used for operations
-    # that operate on all loggers (eg: output.level = :debug, output.enable_loggers, output.disable)
+    level :info
 
     writer :info, :level => :info
 
