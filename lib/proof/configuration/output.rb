@@ -5,12 +5,12 @@ module Proof
       include Setter
       include Proof::Namespace
 
-      attr_accessor :info_logger
-      attr_accessor :pass_logger
-      attr_accessor :fail_logger
-      attr_accessor :error_logger
-      attr_accessor :backtrace_logger
-      attr_accessor :details_logger
+      attr_accessor :info_writer
+      attr_accessor :pass_writer
+      attr_accessor :fail_writer
+      attr_accessor :error_writer
+      attr_accessor :backtrace_writer
+      attr_accessor :details_writer
 
       def configure
         initialize_root_namespace_logger
@@ -31,12 +31,12 @@ module Proof
       def initialize_writers
         root = root_namespace
 
-        self.info_logger = ::Output::Writer.build namespace(root, 'Info')
-        self.pass_logger = ::Output::Writer.build namespace(root, 'Pass')
-        self.fail_logger = ::Output::Writer.build namespace(root, 'Fail')
-        self.error_logger = ::Output::Writer.build namespace(root, 'Error')
-        self.backtrace_logger = ::Output::Writer.build namespace(root, 'Backtrace')
-        self.details_logger = ::Output::Writer.build namespace(root, 'Details')
+        self.info_writer = ::Output::Writer.build namespace(root, 'Info'), :info
+        self.pass_writer = ::Output::Writer.build namespace(root, 'Pass'), :info
+        self.fail_writer = ::Output::Writer.build namespace(root, 'Fail'), :info
+        self.error_writer = ::Output::Writer.build namespace(root, 'Error'), :warn
+        self.backtrace_writer = ::Output::Writer.build namespace(root, 'Backtrace'), :error
+        self.details_writer = ::Output::Writer.build namespace(root, 'Details'), :debug
       end
 
       configure
