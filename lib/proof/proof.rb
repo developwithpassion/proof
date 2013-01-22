@@ -26,4 +26,13 @@ module Proof
   def end
     CoreExt::Object::Methods.undefine_prove
   end
+
+  module LoadPath
+    extend self
+    
+    def add_dir(caller)
+      caller_dir = File.dirname caller
+      $LOAD_PATH.unshift caller_dir unless $LOAD_PATH.include?(caller_dir)
+    end
+  end
 end
