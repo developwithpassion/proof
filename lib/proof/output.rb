@@ -8,6 +8,18 @@ module Proof
 
     writer :info, :level => :info
 
+    writer :h1, :level => :info do |text|
+      "\n#{text.upcase}\n"
+    end
+
+    writer :h2, :level => :info do |text|
+      "#{text}\n"
+    end
+
+    writer :note, :level => :info do |text|
+      "* #{text}"
+    end
+
     writer :pass, :level => :info do |text|
       "Pass: #{text}"
     end

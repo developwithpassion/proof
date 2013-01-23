@@ -11,12 +11,22 @@ module Proof
     Proof::Description.current = description
   end
 
-  def comment(comment)
-    Output.info comment
+  def title(title)
+    Proof::Output.h1 title
   end
 
   def heading(heading)
-    Output.info "\n#{heading}"
+    Proof::Output.h2 heading
+  end
+
+  def section(heading)
+    heading(heading)
+    yield if block_given?
+    Proof::Output.info ''
+  end
+
+  def comment(comment)
+    Proof::Output.note comment
   end
 
   def begin
