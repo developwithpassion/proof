@@ -25,7 +25,7 @@ module Proof
     end
 
     writer :fail, :level => :info do |text|
-      "Fail: #{text}"
+      "-> Fail: #{text}"
     end
 
     writer :error, :level => :warn do |text|
