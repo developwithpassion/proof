@@ -12,7 +12,7 @@ module Proof
     end
 
     def mod
-      @mod ||= (obj_under_test.class == Module ? obj_under_test : obj_under_test.class)
+      @mod ||= ([Module, Class].include?(obj_under_test.class) ? obj_under_test : obj_under_test.class)
     end
 
     def extend_obj
@@ -29,6 +29,7 @@ module Proof
       return @extension if @extension
 
       Output.details "#{mod.name} has #{defined ? '' : 'no '}inner Proof"
+
       return nil unless defined
       
       Output.details "Getting constant #{mod.name}::Proof"
