@@ -2,12 +2,15 @@
 
 require_relative '../init'
 
-working_directory = Dir.pwd
+working_directory = ARGV[0]
+files = ARGV[1]
+
 lib = File.basename(working_directory)
-files = ARGV[0]
 
 files = "#{working_directory}/proofs/#{lib}.rb" if files = []
 files = File.join(files,"**/*.rb") if Dir.exist?(files)
+
+$LOAD_PATH.unshift("#{working_directory}/proofs")
 
 Proof::Runner::Suite.run(files)
 
