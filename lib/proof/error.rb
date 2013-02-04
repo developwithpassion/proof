@@ -1,14 +1,13 @@
 module Proof
   class Error
-    attr_reader :error
+    include Initializer
+
+    initializer :error
+
 
     def self.output(error)
       instance = new error
       instance.output
-    end
-
-    def initialize(error)
-      @error = error
     end
 
     def backtrace

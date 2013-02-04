@@ -2,26 +2,34 @@ require_relative '../proofs_init'
 
 Proof.begin
 
-class ThingThatRaisesAnError
-  module Proof
-    def raises_an_error
-      begin
-        raise
-      rescue
-        true
+module ErrorsProofs
+  class Example
+    module Proof
+      def raises_an_error
+        begin
+          raise
+        rescue
+          true
+        end
       end
     end
   end
 end
 
-heading 'When an error is raised subsequent proofs still run'
+def example
+  ErrorsProofs::Example.new
+end
 
-desc 'Raises an error'
-item = ThingThatRaisesAnError.new
-item.prove{ raises_an_error }
+heading 'When an error is raised subsequent proofs still run' do
+  desc 'Raises an error'
 
-ran_next = false
-item.instance_eval { ran_next = true }
+  item = example
+  item.prove{ raises_an_error }
 
-desc 'Still runs'
-item.prove{ ran_next }
+  ran_next = false
+  item.instance_eval { ran_next = true }
+
+  desc 'Still runs'
+  item.prove{ ran_next }
+end
+

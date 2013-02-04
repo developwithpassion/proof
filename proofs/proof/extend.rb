@@ -1,28 +1,35 @@
 require_relative '../proofs_init'
 
-class SomeObjectUnderTest
-  module Proof
-    def extended?
-      true
+title 'Extending an object with proof behaviour'
+
+module ExtendProofs
+  class Example
+    module Proof
+      def extended?
+        true
+      end
     end
   end
 end
 
+def example
+  ExtendProofs::Example.new
+end
 proof 'Extends the object under test with the inner proof module' do
-  some_object_under_test = SomeObjectUnderTest.new
+  item = example
 
-  extender = Proof::Extend.new(some_object_under_test)
+  extender = Proof::Extend.new(item)
   extender.extend_obj
 
-  Object.new.prove { some_object_under_test.extended? }
+  item.prove { extended? }
 end
 
 
 proof 'Objects under test without an inner proof module can still be proven' do
-  some_object_under_test = Object.new
+  item = Object.new
 
-  extender = Proof::Extend.new(some_object_under_test)
+  extender = Proof::Extend.new(item)
   extender.extend_obj
 
-  some_object_under_test.prove { true }
+  item.prove { true }
 end

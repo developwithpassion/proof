@@ -24,14 +24,6 @@ module Proof
       end
     end
   end
-
-  def some_error
-    begin
-      raise 
-    rescue => error
-      error
-    end
-  end
 end
 
 def execution(blk)
