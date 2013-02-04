@@ -10,6 +10,7 @@ module Proof
               obj_under_test = self
               Proof::Extend.into obj_under_test
               result = Proof::Execution.run Description.current, obj_under_test, blk
+              Events::Event.publish(result.status, result)
               result.write
             end
           end
