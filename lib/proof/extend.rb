@@ -1,14 +1,12 @@
 module Proof
   class Extend
-    attr_reader :obj_under_test
+    include Initializer
+
+    initializer :obj_under_test
 
     def self.into(obj_under_test)
       instance = new obj_under_test
       instance.extend_obj
-    end
-
-    def initialize(obj_under_test)
-      @obj_under_test = obj_under_test
     end
 
     def mod

@@ -1,18 +1,12 @@
 module Proof
   class Execution
-    attr_reader :description
-    attr_reader :obj_under_test
-    attr_reader :blk
+    include Initializer
+
+    initializer :description, :obj_under_test, :blk
 
     def self.run(description, obj_under_test, blk)
       instance = new description, obj_under_test, blk
       instance.run
-    end
-
-    def initialize(description, obj_under_test, blk)
-      @description = description
-      @obj_under_test = obj_under_test
-      @blk = blk
     end
 
     def run

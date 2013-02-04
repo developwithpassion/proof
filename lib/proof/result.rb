@@ -1,14 +1,8 @@
 module Proof
   class Result
-    attr_reader :description
-    attr_reader :status
-    attr_reader :error
+    include Initializer
 
-    def initialize(description, status, error=nil)
-      @description = description
-      @status = status
-      @error = error
-    end
+    initializer :description, :status, :error
 
     def write
       Output.write output_method, description
