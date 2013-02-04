@@ -1,5 +1,13 @@
 #!/usr/bin/env ruby
 
-require_relative '../lib/proof'
+require_relative '../init'
 
+working_directory = Dir.pwd
+lib = File.basename(working_directory)
+files = ARGV[0]
+
+files = "#{working_directory}/proofs/#{lib}.rb" if files = []
+files = File.join(files,"**/*.rb") if Dir.exist?(files)
+
+Proof::Runner::Suite.run(files)
 

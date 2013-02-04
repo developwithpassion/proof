@@ -35,16 +35,16 @@ module Proof
         Output.title summary
       end
 
-      handle :pass do|ignored|
-          self.passes += 1
+      handle :pass  do
+        self.passes += 1
       end
 
-      handle :fail do|ignored|
-          self.failures += 1
+      handle :fail do
+        self.failures += 1
       end
 
-      handle :error do|ignored|
-          self.errors += 1
+      handle :error do
+        self.errors += 1
       end
 
       def summary
