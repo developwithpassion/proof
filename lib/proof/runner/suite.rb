@@ -7,15 +7,16 @@ module Proof
 
       initializer :files
 
-      def self.run_globs(*glob_patterns)
-        files = []
-        glob_patterns.each do|pattern|
-          files.concat Dir.glob(pattern)
+      def self.normalize(args)
+        all_files = []
+        args.each do|item|
+          all_files.concat item.is_a?(Array) ? item : Dir.glob(item)
         end
-        run(files)
+        all_files
       end
 
-      def self.run(files)
+      def self.run(*args)
+        files = normalize(args)
         instance = new files
         results = instance.run
         Summary.output(results)
