@@ -1,7 +1,7 @@
 require 'bundler'
 Bundler.setup
 
-lib_dir = File.expand_path('../lib', __FILE__)
+lib_dir = File.expand_path('lib', __FILE__)
 $LOAD_PATH.unshift lib_dir
 
 require 'proof'
