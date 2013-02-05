@@ -34,5 +34,9 @@ module Proof
 
     writer :backtrace, :level => :error
     writer :details, :level => :debug
+
+    writer :summary, :level => :info do |text|
+      "\n#{text.upcase}\n"
+    end
   end
 end

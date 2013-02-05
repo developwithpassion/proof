@@ -5,30 +5,53 @@ module Proof
     class Suite
       include Initializer
       
-      attr_reader :passes
-      attr_reader :fails
-      attr_reader :errors
-
-      FAIL_PATTERN = /-> Fail:/
-      PASS_PATTERN = /\sPass:/
-      ERROR_PATTERN = /\sError:/
 
       initializer :files
       
       def self.run(glob_pattern)
         files = Dir.glob(glob_pattern)
-        output = StringIO.new
         instance = new files
-        instance.run_proofs
+        results = instance.run
+
+        Summary.output(results)
       end
 
-      def calculate_results(output)
-        @passes = output.scan(PASS_PATTERN).count
-        @fails = output.scan(FAIL_PATTERN).count
-        @errors = output.scan(ERROR_PATTERN).count
+      class Summary
+        include Initializer
+
+        FAIL_PATTERN = /-> Fail:.*$/
+        PASS_PATTERN = /\sPass:.*$/
+        ERROR_PATTERN = /\sError:.*$/
+
+        initializer :results
+
+        def self.output(results)
+          instance = new results
+          instance.output
+        end
+
+        def passes
+          results.grep PASS_PATTERN
+        end
+
+        def fails
+          results.grep FAIL_PATTERN
+        end
+
+        def errors
+          results.grep ERROR_PATTERN
+        end
+
+        def output
+          summary = "Passed: #{passes.count}\n"
+          summary = "#{summary}Failed: #{fails.count}\n"
+          summary = "#{summary}Errors: #{errors.count}\n"
+
+          Output.summary summary
+        end
       end
 
-      def run_proofs
+      def run
         appender = Logging::Appenders::StringIo.new(:runner)
 
         Output.push_appender appender do
@@ -37,18 +60,9 @@ module Proof
           end
         end
 
-        output = appender.readlines.join("\n")
-        calculate_results output
-
-        Output.title summary
+        appender.readlines
       end
 
-
-      def summary
-        summary = "Passed: #{self.passes}\n"
-        summary = "#{summary}Failed: #{self.fails}\n"
-        summary = "#{summary}Errors: #{self.errors}\n"
-      end
     end
   end
 end

@@ -1,6 +1,6 @@
 require_relative '../proofs_init'
 
-title 'Using The Prove Method'
+title 'The Prove Method'
 
 module ProofProofs
   class Example

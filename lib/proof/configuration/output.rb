@@ -11,6 +11,7 @@ module Proof
       attr_accessor :error_writer
       attr_accessor :backtrace_writer
       attr_accessor :details_writer
+      attr_accessor :details_writer
 
       def configure
         initialize_writers
@@ -23,12 +24,12 @@ module Proof
 
         # TODO Writers need to be built from the output object that houses them,
         # so that the output object can give the writer its settings, eg: logger_level
-        self.info_writer = ::Output::Writer.build namespace(root, 'Info'), :info
-        self.pass_writer = ::Output::Writer.build namespace(root, 'Pass'), :info
-        self.fail_writer = ::Output::Writer.build namespace(root, 'Fail'), :info
-        self.error_writer = ::Output::Writer.build namespace(root, 'Error'), :warn
-        self.backtrace_writer = ::Output::Writer.build namespace(root, 'Backtrace'), :error
-        self.details_writer = ::Output::Writer.build namespace(root, 'Details'), :debug
+        # self.info_writer = ::Output::Writer.build namespace(root, 'Info'), :info
+        # self.pass_writer = ::Output::Writer.build namespace(root, 'Pass'), :info
+        # self.fail_writer = ::Output::Writer.build namespace(root, 'Fail'), :info
+        # self.error_writer = ::Output::Writer.build namespace(root, 'Error'), :warn
+        # self.backtrace_writer = ::Output::Writer.build namespace(root, 'Backtrace'), :error
+        # self.details_writer = ::Output::Writer.build namespace(root, 'Details'), :debug
       end
 
       # configure

@@ -1,6 +1,6 @@
 require_relative '../proofs_init'
 
-title 'Output demonstration'
+title 'Output'
 
 level = Proof::Output.instance.level
 
