@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-
 require_relative '../init'
 
 Proof::Runner::Suite.run 'proofs/proof/**/*.rb', 'proofs/demos/**/*.rb'
