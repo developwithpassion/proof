@@ -2,5 +2,5 @@
 
 require_relative '../init'
 
-Proof::Runner::Suite.run 'proofs/proof/**/*.rb', Dir.glob('proofs/demos/**/*.rb')
+Proof::Runner::Suite.run 'proofs/proof/**/*.rb', 'proofs/demos/**/*.rb'
 
