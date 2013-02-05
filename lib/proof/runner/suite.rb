@@ -26,6 +26,7 @@ module Proof
 
         Output.push_appender appender do
           files.each do|file|
+            puts "The file is #{file}"
             load file
           end
         end
