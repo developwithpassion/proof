@@ -4,16 +4,33 @@ module Proof
   module Runner
     class Suite
       include Initializer
-      
 
       initializer :files
-      
-      def self.run(glob_pattern)
-        files = Dir.glob(glob_pattern)
+
+      def self.run_globs(*glob_patterns)
+        files = []
+        glob_patterns.each do|pattern|
+          files.concat Dir.glob(pattern)
+        end
+        run(files)
+      end
+
+      def self.run(files)
         instance = new files
         results = instance.run
-
         Summary.output(results)
+      end
+
+      def run
+        appender = Logging::Appenders::StringIo.new(:runner)
+
+        Output.push_appender appender do
+          files.each do|file|
+            load file
+          end
+        end
+
+        appender.readlines
       end
 
       class Summary
@@ -51,17 +68,6 @@ module Proof
         end
       end
 
-      def run
-        appender = Logging::Appenders::StringIo.new(:runner)
-
-        Output.push_appender appender do
-          files.each do|file|
-            load file
-          end
-        end
-
-        appender.readlines
-      end
 
     end
   end
