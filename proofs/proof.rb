@@ -6,6 +6,3 @@ require_relative 'proof/error_output'
 require_relative 'proof/execution'
 require_relative 'proof/extend'
 
-require_relative 'demos'
-
-
