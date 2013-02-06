@@ -1,1 +1,0 @@
-require 'proof/configuration/output'

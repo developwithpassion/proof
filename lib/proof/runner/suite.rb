@@ -36,9 +36,7 @@ module Proof
       end
 
       def run
-        appender = Logging::Appenders::StringIo.new(:runner)
-
-        Output.push_appender appender do
+        appender = Output.push_device_from_opts(:string_io) do
           files.each do |file|
             load file
           end
@@ -51,8 +49,8 @@ module Proof
         include Initializer
 
         FAIL_PATTERN = /-> Fail:.*$/
-        PASS_PATTERN = /\sPass:.*$/
-        ERROR_PATTERN = /\sError:.*$/
+        PASS_PATTERN = /Pass:.*$/
+        ERROR_PATTERN = /Error:.*$/
 
         initializer :results
 
@@ -81,8 +79,6 @@ module Proof
           Output.summary summary
         end
       end
-
-
     end
   end
 end
