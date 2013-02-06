@@ -1,4 +1,5 @@
 require 'stringio'
+require 'pathname'
 
 module Proof
   module Runner
@@ -7,26 +8,38 @@ module Proof
 
       initializer :files
 
-      def self.normalize(args)
-        all_files = []
-        args.each do|item|
-          all_files.concat item.is_a?(Array) ? item : Dir.glob(item)
-        end
-        all_files
-      end
-
       def self.run(*args)
-        files = normalize(args)
+        base_dir = File.expand_path(File.dirname(caller[0]))
+        file_patterns = flatten(args)
+        files = glob(file_patterns, base_dir)
+
         instance = new files
         results = instance.run
         Summary.output(results)
+      end
+
+      def self.glob(patterns, base_dir)
+        files = []
+        patterns.each do |pattern|
+          pattern = Pathname.new(pattern).absolute? ? pattern : File.join(base_dir, pattern)
+          files.concat Dir.glob(pattern)
+        end
+        files
+      end
+
+      def self.flatten(args)
+        files = []
+        args.each do |pattern|
+          files.concat pattern.is_a?(Array) ? pattern : [pattern]
+        end
+        files
       end
 
       def run
         appender = Logging::Appenders::StringIo.new(:runner)
 
         Output.push_appender appender do
-          files.each do|file|
+          files.each do |file|
             load file
           end
         end
