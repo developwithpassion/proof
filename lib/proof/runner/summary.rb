@@ -12,7 +12,7 @@ module Proof
       def self.output(results)
         instance = new results
         instance.output
-        output.status
+        instance.status
       end
 
       def passes
@@ -28,15 +28,25 @@ module Proof
       end
 
       def status
-        if [fails.count, errors.count].any? { |count| count > 0 }
+        if no_results? or any_failures?
           @status = :failure
-        elsif passes.count > 0
+        else any_successes?
           @status = :success
-        else
-          @status = :initialized
         end
  
         @status
+      end
+
+      def no_results?
+        [passes.count, fails.count, errors.count].all? { |count| count == 0 }
+      end
+
+      def any_failures?
+        [fails.count, errors.count].any? { |count| count > 0 }
+      end
+
+      def any_successes?
+        [fails.count, errors.count].any? { |count| count > 0 }
       end
 
       def summary

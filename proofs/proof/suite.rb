@@ -26,7 +26,7 @@ end
 
 heading 'A suite with no files' do
   string_io = ::Proof::Output.summary_writer.push_device :string_io do
-    Proof::Runner::Suite.run "some_glob"
+    Proof::Runner::Suite.run "some_file_pattern"
   end
 
   summary = SuiteProofs::Summary.new string_io.read

@@ -1,24 +1,15 @@
 require_relative '../proofs_init'
 
-title 'Suite Exit Status'
+title 'Exit Status'
 
+proof 'A suite with no files is a failure' do
+  exit_status = Proof::Runner::Suite.run 'some_file_pattern'
 
-module Proof
-  module Runner
-    class Summary
-      module Proof
-
-      end
-    end
-  end
+  exit_status.prove { self == :failure }
 end
 
-def exit_status(file_pattern)
-  Proof::Runner::Suite.run file_pattern
+proof 'A suite with any failures is a failure' do
+  exit_status = Proof::Runner::Suite.run 'some_file_pattern'
+
+  exit_status.prove { self == :failure }
 end
-
-proof 'A suite with no files' do
-  puts Proof::Runner::Suite.run "some_glob"
-end
-
-

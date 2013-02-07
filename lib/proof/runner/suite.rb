@@ -16,7 +16,7 @@ module Proof
         instance = new files
 
         if instance.empty?
-          ::Proof::Output.summary "! Suite has no files"
+          ::Proof::Output.summary "!! Suite has no files"
           return :failure
         end
 
