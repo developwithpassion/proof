@@ -12,6 +12,7 @@ module Proof
       def self.output(results)
         instance = new results
         instance.output
+        output.status
       end
 
       def passes
@@ -26,38 +27,27 @@ module Proof
         results.grep ERROR_PATTERN
       end
 
-      def output
-        summary = "Passed: #{passes.count}\n"
-        summary << "Failed: #{fails.count}\n"
-        summary << "Errors: #{errors.count}\n"
-
-        Output.summary summary
-
-        # return exit_code
+      def status
+        if [fails.count, errors.count].any? { |count| count > 0 }
+          @status = :failure
+        elsif passes.count > 0
+          @status = :success
+        else
+          @status = :initialized
+        end
+ 
+        @status
       end
 
-    #   def exit_code
-    #     ok = passes.count <= 0
-    #     failures = fails.count <= 0
-    #     errors = errors.count <= 0
+      def summary
+        "Passed: #{passes.count}\n" \
+        "Failed: #{fails.count}\n" \
+        "Errors: #{errors.count}\n"
+      end
 
-    #     return ExitCodes.errors if errors
-
-    #     return ExitCodes.failures if failures
-
-    #     return ExitCodes.ok if failures
-
-
-
-
-    #     if failures
-    #       return 0
-    #     elsif fatal
-    #       return 1
-    #     else
-    #       return -1
-    #     end
-    #   end
+      def output
+        Output.summary summary
+      end
     end
   end
 end

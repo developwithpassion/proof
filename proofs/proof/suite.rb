@@ -1,5 +1,7 @@
 require_relative '../proofs_init'
 
+title 'Suite'
+
 module SuiteProofs
   class Summary
     include Initializer
