@@ -13,12 +13,12 @@ module Proof
         file_patterns = flatten(args)
         files = glob(file_patterns, base_dir)
 
-        instance = new files
-
-        if instance.empty?
+        if files.empty?
           ::Proof::Output.summary "!! Suite has no files"
           return :failure
         end
+
+        instance = new files
 
         results = instance.run
 
@@ -40,10 +40,6 @@ module Proof
           files.concat pattern.is_a?(Array) ? pattern : [pattern]
         end
         files
-      end
-
-      def empty?
-        files.empty?
       end
 
       def run
