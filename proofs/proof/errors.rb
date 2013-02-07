@@ -1,35 +1,30 @@
 require_relative '../proofs_init'
 
-Proof.begin
+title 'Errors Within a Proof'
 
-module ErrorsProofs
+module ErrorProofs
   class Example
+    def fail!
+      raise
+    end
+
     module Proof
-      def raises_an_error
-        begin
-          raise
-        rescue
-          true
-        end
+      def continues?
+        true
       end
     end
   end
 end
 
 def example
-  ErrorsProofs::Example.new
+  ErrorProofs::Example.new
 end
 
-heading 'When an error is raised subsequent proofs still run' do
-  desc 'Raises an error'
+proof 'When an error is raised within a proof, subsequent proofs still run' do
+  eg = example
+  eg.prove { fail! }
 
-  item = example
-  item.prove{ raises_an_error }
-
-  ran_next = false
-  item.instance_eval { ran_next = true }
-
-  desc 'Still runs'
-  item.prove{ ran_next }
+  desc 'Continues to run'
+  eg.prove { continues? }
 end
 
