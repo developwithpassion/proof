@@ -21,7 +21,7 @@ module Proof
         instance = new files
         results = instance.run
 
-        # exit_code = Summary.output(results)
+        exit_code = Runner::Summary.output(results)
 
         # return exit_code
       end
@@ -80,10 +80,9 @@ module Proof
         end
 
         def output
-          summary = ''
-          # summary = "Passed: #{passes.count}\n"
-          # summary = "#{summary}Failed: #{fails.count}\n"
-          # summary = "#{summary}Errors: #{errors.count}\n"
+          summary = "Passed: #{passes.count}\n"
+          summary << "Failed: #{fails.count}\n"
+          summary << "Errors: #{errors.count}\n"
 
           Output.summary summary
 

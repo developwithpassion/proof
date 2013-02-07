@@ -37,5 +37,3 @@ heading 'A suite with no files' do
     summary.prove { no_summary_counts? }
   end
 end
-
-comment "TODO: return exit code when failures"
