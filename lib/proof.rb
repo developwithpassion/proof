@@ -15,5 +15,3 @@ require 'proof/proof'
 require 'proof/output'
 require 'proof/suite'
 require 'proof/summary'
-
-Proof::LoadPath.add_dir caller[0]
