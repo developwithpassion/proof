@@ -1,0 +1,5 @@
+ruby 1.9.3p286 (2012-10-12 revision 37165) [x86_64-darwin11.4.2]
+-> Fail: Error and backtrace are output
+-> Fail: A failing proof
+-> Fail: Has no summary counts
+-> Fail: Fail @ info
