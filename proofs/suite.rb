@@ -1,3 +1,3 @@
 require_relative 'proofs_init'
 
-Proof::Runner::Suite.run "proof/**/*.rb", "demos/**/*.rb"
+Proof::Suite.run "proof/**/*.rb", "demos/**/*.rb"

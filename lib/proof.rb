@@ -13,6 +13,7 @@ require 'proof/error'
 require 'proof/core_ext'
 require 'proof/proof'
 require 'proof/output'
-require 'proof/runner'
+require 'proof/suite'
+require 'proof/summary'
 
 Proof::LoadPath.add_dir caller[0]
