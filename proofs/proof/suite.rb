@@ -21,7 +21,7 @@ class Summary
 end
 
 heading 'A suite with no files' do
-  string_io = ::Proof::Output.summary_writer.push_device :string_io do
+  string_io = ::Proof::Output.summary_writer.push_device :suite_proofs, :device => :string_io do
     Proof::Suite.run "some_file_pattern"
   end
 

@@ -42,13 +42,13 @@ module Proof
     end
 
     def run
-      appender = Output.push_device(:string_io) do
+      device = Output.push_device(:proof_suite_results, :device => :string_io) do
         files.each do |file|
           load file
         end
       end
 
-      appender.readlines
+      device.readlines
     end
   end
 end
