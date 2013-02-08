@@ -6,10 +6,10 @@ module Proof
     FAIL_PATTERN = /-> Fail:.*$/
     ERROR_PATTERN = /Error:.*$/
 
-    initializer :results
+    initializer :results, :the_output
 
-    def self.output(results)
-      instance = new results
+    def self.output(results, output)
+      instance = new results, output
       instance.output
       instance.status
     end
@@ -55,7 +55,7 @@ module Proof
     end
 
     def output
-      Output.summary summary
+      @the_output.summary summary
     end
   end
 end

@@ -9,19 +9,32 @@ module Proof
       @device ||= self.class.default_device
     end
 
-    def initialize(files, device = nil)
+    def output
+      @output ||= self.class.default_output
+    end
+
+    def initialize(files, device = nil, output = nil)
       @files = files
       @device = device
+      @output = output
     end
 
     def self.default_device
       Output::Devices.build_device(:string_io, :name => :suite_results)
     end
 
-    def self.run(*args, device)
-      unless device.is_a? Logging::Appender
-        args.push device
-        device = default_device
+    def self.default_output
+      Proof::Output.instance
+    end
+
+    def self.run(*args)
+      device = default_device
+      output = default_output
+
+      if args.last.is_a? Hash
+        opts = args.pop
+        device = opts[:device] || device
+        output = opts[:output] || output
       end
 
       base_dir = File.expand_path(File.dirname(caller[0]))
@@ -29,14 +42,14 @@ module Proof
       files = glob(file_patterns, base_dir)
 
       if files.empty?
-        ::Proof::Output.summary "!! Suite has no files"
+        output.summary "!! Suite has no files"
         return :failure
       end
 
-      instance = new files, device
+      instance = new files, device, output
       results = instance.run
 
-      Summary.output(results)
+      Summary.output(results, output)
     end
 
     def self.glob(patterns, base_dir)
@@ -57,7 +70,7 @@ module Proof
     end
 
     def run
-      Output.push_device(device) do
+      output.push_device(device) do
         files.each do |file|
           load file
         end

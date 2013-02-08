@@ -18,7 +18,9 @@ def example
 end
 
 proof 'A failing proof' do
-  example.prove { not proven? }
+  Proof::Output.suspend_devices :suite_results do
+    example.prove { not proven? }
+  end
 end
 
 proof 'A passing proof' do

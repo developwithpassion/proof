@@ -22,7 +22,9 @@ end
 
 proof 'When an error is raised within a proof, subsequent proofs still run' do
   eg = example
-  eg.prove { fail! }
+  Proof::Output.suspend_devices :suite_results do
+    eg.prove { fail! }
+  end
 
   desc 'Continues to run'
   eg.prove { continues? }
