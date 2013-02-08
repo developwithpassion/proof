@@ -14,11 +14,6 @@ module Proof
       @last_write
     end
 
-    def write(method, message)
-      super method, message
-      record_last_write method, message
-    end
-
     level :info
 
     def new_line(num=1)
@@ -42,6 +37,11 @@ module Proof
       else
         return text
       end
+    end
+
+    def write(method, message)
+      super method, message
+      record_last_write method, message
     end
 
     writer :h1, :level => :info do |text|

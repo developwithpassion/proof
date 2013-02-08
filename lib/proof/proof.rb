@@ -19,14 +19,14 @@ module Proof
     Proof::Output.h2 heading
     if block_given?
       yield
-      Proof::Output.info ''
+      # Proof::Output.info ''
     end
   end
 
-  def section(heading='')
-    heading(heading)
+  def section(heading=nil)
+    heading(heading) if heading
     yield if block_given?
-    Proof::Output.info ''
+    # Proof::Output.info ''
   end
 
   def comment(comment)

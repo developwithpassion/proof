@@ -32,7 +32,7 @@ heading "Heading" do
 
   otp.details "Text: <<#{text}>>"
 
-  proof 'Preceded by one new lines' do
+  proof 'Preceded by one new line' do
     text.prove { preceded_by_one_new_line? }
   end
 end
