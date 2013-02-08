@@ -3,11 +3,27 @@ require 'pathname'
 
 module Proof
   class Suite
-    include Initializer
+    attr_reader :files
 
-    initializer :files
+    def device
+      @device ||= self.class.default_device
+    end
 
-    def self.run(*args)
+    def initialize(files, device = nil)
+      @files = files
+      @device = device
+    end
+
+    def self.default_device
+      Output::Devices.build_device(:string_io, :name => :suite_results)
+    end
+
+    def self.run(*args, device)
+      unless device.is_a? Logging::Appender
+        args.push device
+        device = default_device
+      end
+
       base_dir = File.expand_path(File.dirname(caller[0]))
       file_patterns = flatten(args)
       files = glob(file_patterns, base_dir)
@@ -17,8 +33,7 @@ module Proof
         return :failure
       end
 
-      instance = new files
-
+      instance = new files, device
       results = instance.run
 
       Summary.output(results)
@@ -42,7 +57,7 @@ module Proof
     end
 
     def run
-      device = Output.push_device(:string_io, :device => :suite_results) do
+      Output.push_device(device) do
         files.each do |file|
           load file
         end
