@@ -19,28 +19,27 @@ def output
   output = Proof::Output.new
 end
 
-def block_level_methods
+def heading_methods
   [:h1, :h2]
 end
 
-def line_level_methods
-  # [:pass, :fail, :error, :backtrace, :details, :note, :info]
-  [:pass, :error]
+def proof_methods
+  [:pass, :fail, :error, :backtrace, :details, :note, :info]
 end
 
-block 'Pass preceded heading' do
-  block_level_methods.each do |block_level_method|
+section 'Pass preceded by heading' do
+  heading_methods.each do |heading_method|
     otp = output
     dvc = device
 
     otp.push_device(dvc) do
-      heading "Pass Preceded By #{block_level_method.capitalize}" do
+      heading "Pass Preceded By #{heading_method.capitalize}" do
 
-        some_block = "some #{block_level_method}"
+        some_block = "some #{heading_method}"
         some_line = "some pass"
 
         otp.suspend_devices :stdout do
-          otp.write block_level_method, some_block
+          otp.write heading_method, some_block
           otp.pass some_line
         end
 
