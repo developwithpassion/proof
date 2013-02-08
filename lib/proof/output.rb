@@ -20,23 +20,9 @@ module Proof
       "\n" * num
     end
 
-    def prepend_new_line(text, num=1)
+    def prepend(num, text)
       new_lines = new_line(num)
       "#{new_lines}#{text}"
-    end
-
-    def prepend_line_level_new_line(text)
-      prepend_new_line text
-    end
-
-    def self.message(method, text)
-      if method == :pass || method == :error
-        return "#{method.capitalize}: #{text}"
-      elsif method == :fail
-        return "-> Fail: #{text}"
-      else
-        return text
-      end
     end
 
     def write(method, message)
@@ -45,23 +31,23 @@ module Proof
     end
 
     writer :h1, :level => :info do |text|
-      prepend_new_line text.upcase, 2
+      prepend 2, text.upcase
     end
 
     writer :h2, :level => :info do |text|
-      prepend_new_line text, 1
+      prepend 1, text
     end
 
     writer :pass, :level => :info do |text|
-      prepend_line_level_new_line message(:pass, text)
+      prepend 1, "Pass: #{text}"
     end
 
     writer :fail, :level => :info do |text|
-      prepend_line_level_new_line message(:fail, text)
+      prepend 1, "-> Fail: #{text}"
     end
 
     writer :error, :level => :warn do |text|
-      prepend_line_level_new_line message(:error, text)
+      prepend 1, "Error: #{text}"
     end
 
     writer :backtrace, :level => :error

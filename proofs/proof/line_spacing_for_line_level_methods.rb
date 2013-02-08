@@ -25,7 +25,7 @@ end
 
 def line_level_methods
   # [:pass, :fail, :error, :backtrace, :details, :note, :info]
-  [:pass, :fail, :error]
+  [:pass, :error]
 end
 
 section do
@@ -61,7 +61,7 @@ section do
       otp.details "Text: <<#{text}>>"
 
       proof "#{line_level_method} is preceded by two new lines" do
-        line_level_message = ::Proof::Output.message(line_level_method, line)
+        line_level_message = "#{line_level_method.capitalize}: #{line}"
         text.prove { line_level_preceded_by_two_new_lines? line_level_message, block }
       end
     end
