@@ -51,8 +51,8 @@ block do
       text = dvc.read
 
       proof "#{line_level_method} is preceded by two new lines" do
-        line_level_message = "#{line_level_method.capitalize}: #{line}"
-        text.prove { line_level_preceded_by_two_new_lines? line_level_message, block }
+        line = "#{line_level_method.capitalize}: #{line}"
+        text.prove { line_level_preceded_by_two_new_lines? line, block }
       end
     end
   end
