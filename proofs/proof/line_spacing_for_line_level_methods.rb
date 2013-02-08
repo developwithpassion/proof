@@ -28,15 +28,13 @@ def line_level_methods
   [:pass, :error]
 end
 
-section do
+block do
   combined = block_level_methods.product line_level_methods
 
   combined.each do |combination|
     otp = output
     dvc = device
     otp.push_device dvc
-
-    # otp.level = :debug
 
     block_level_method, line_level_method = combination
 
@@ -45,20 +43,12 @@ section do
       block = "some #{block_level_method}"
       line = "some #{line_level_method}"
 
-      otp.details "Block Method: #{block_level_method}"
-      otp.details "Line Method: #{line_level_method}"
-
-      otp.details "Block: #{block}"
-      otp.details "Line: #{line}"
-
       otp.suspend_devices :stdout do
         otp.write block_level_method, block
         otp.write line_level_method, line
       end
 
       text = dvc.read
-
-      otp.details "Text: <<#{text}>>"
 
       proof "#{line_level_method} is preceded by two new lines" do
         line_level_message = "#{line_level_method.capitalize}: #{line}"

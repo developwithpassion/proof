@@ -19,15 +19,14 @@ module Proof
     Proof::Output.h2 heading
     if block_given?
       yield
-      # Proof::Output.info ''
     end
   end
 
   def section(heading=nil)
     heading(heading) if heading
     yield if block_given?
-    # Proof::Output.info ''
   end
+  alias :block :section
 
   def comment(comment)
     Proof::Output.note comment
