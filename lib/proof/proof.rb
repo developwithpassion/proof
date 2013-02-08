@@ -23,7 +23,6 @@ module Proof
   end
 
   def section(heading=nil)
-    heading(heading) if heading
     yield if block_given?
   end
   alias :block :section

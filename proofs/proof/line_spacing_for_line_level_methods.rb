@@ -28,7 +28,7 @@ def line_level_methods
   [:pass, :error]
 end
 
-block do
+block 'Pass preceded heading' do
   block_level_methods.each do |block_level_method|
     otp = output
     dvc = device
