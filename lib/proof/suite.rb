@@ -42,7 +42,7 @@ module Proof
     end
 
     def run
-      device = Output.push_device(:proof_suite_results, :device => :string_io) do
+      device = Output.push_device(:string_io, :device => :suite_results) do
         files.each do |file|
           load file
         end
