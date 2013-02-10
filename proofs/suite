@@ -1,10 +1,12 @@
+#!/usr/bin/env ruby
+
 require_relative 'proofs_init'
 
 files = Dir.glob("proof/**/*.rb")
 files.reject! { |item| /passes\.rb/ =~ item }
 files.reject! { |item| /fails\.rb/ =~ item }
 
-Proof::Suite.run files
+result = Proof::Suite.run files
 # Proof::Suite.run "proof/error_output.rb"
 # Proof::Suite.run "proof/errors.rb" - 1 pass
 # Proof::Suite.run "proof/execution.rb" - 3 pass
@@ -15,3 +17,8 @@ Proof::Suite.run files
 # Proof::Suite.run "proof/line_spacing_for_title.rb" - 1 pass
 # Proof::Suite.run "proof/proof.rb" - 2 passes
 # Proof::Suite.run "proof/suite.rb" - 2 passes
+
+exit result == :success
+
+
+
