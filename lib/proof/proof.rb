@@ -31,11 +31,11 @@ module Proof
     Proof::Output.note comment
   end
 
-  def begin
+  def self.begin
     CoreExt::Object::Methods.define_prove
   end
 
-  def end
+  def self.end
     CoreExt::Object::Methods.undefine_prove
   end
 end
