@@ -9,46 +9,46 @@ module Proof
     level :info
 
     writer :h1, :level => :info do |text|
-      prepend :h1, text.upcase
+      prefix :h1, text.upcase
     end
 
     writer :h2, :level => :info do |text|
-      prepend :h2, text
+      prefix :h2, text
     end
 
     writer :pass, :level => :info do |text|
-      prepend :pass, "Pass: #{text}"
+      prefix :pass, "Pass: #{text}"
     end
 
     writer :fail, :level => :info do |text|
-      prepend :fail, "-> Fail: #{text}"
+      prefix :fail, "-> Fail: #{text}"
     end
 
     writer :error, :level => :warn do |text|
-      prepend :error, "Error: #{text}"
+      prefix :error, "Error: #{text}"
     end
 
     writer :backtrace, :level => :error do |text|
-      prepend :backtrace, text
+      prefix :backtrace, text
     end
 
     writer :details, :level => :debug do |text|
-      prepend :details, "! #{text}"
+      prefix :details, "! #{text}"
     end
 
     writer :note, :level => :info do |text|
-      prepend :note, "* #{text}"
+      prefix :note, "* #{text}"
     end
 
     writer :info, :level => :info do |text|
-      prepend :info, text
+      prefix :info, text
     end
 
     writer :summary, :level => :info do |text|
-      prepend :summary, text.upcase
+      prefix :summary, text.upcase
     end
 
-    def prepend(method, text)
+    def prefix(method, text)
       lines = lines(method)
       "#{lines}#{text}"
     end
