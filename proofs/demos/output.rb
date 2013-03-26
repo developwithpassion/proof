@@ -18,7 +18,6 @@ Proof::Output.push_level :debug do
 
   Proof::Output.note "Note @ #{level}"
   Proof::Output.info "Info @ #{level}"
-  Proof::Output.raw "Raw @ #{level}"
-
+  
   Proof::Output.summary "Summary @ #{level}"
 end

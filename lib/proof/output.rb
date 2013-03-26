@@ -48,10 +48,6 @@ module Proof
       prefix :summary, text.upcase
     end
 
-    writer :raw do |text|
-      prefix :raw, text
-    end
-
     def prefix(method, text)
       lines = lines(method)
       "#{lines}#{text}"
@@ -64,12 +60,6 @@ module Proof
         lines = 1
       elsif [:pass, :fail].include? method
         if last_method? :h1, :h2, :error, :backtrace
-          lines = 1
-        else
-          lines = 0
-        end
-      elsif method == :raw
-        if last_method? :h1
           lines = 1
         else
           lines = 0
