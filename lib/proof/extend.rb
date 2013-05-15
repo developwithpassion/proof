@@ -20,7 +20,7 @@ module Proof
       end
 
       Output.details "Extending #{extension_name} into #{mod.name}"
-      obj_under_test.extend extension
+      Extension.! obj_under_test, extension
     end
 
     def extension
