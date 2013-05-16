@@ -11,7 +11,7 @@ module Proof
     end
 
     def backtrace
-      @backtrace ||= @error.backtrace.extend Backtrace
+      @backtrace ||= Extension.!(@error.backtrace, Backtrace)
     end
 
     def output     

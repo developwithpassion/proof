@@ -1,8 +1,9 @@
-require 'logging'
-require 'single'
-require 'setter'
-require 'output'
+require 'extension'
 require 'initializer'
+require 'logging'
+require 'output'
+require 'setter'
+require 'single'
 
 require 'proof/namespace'
 require 'proof/description'
