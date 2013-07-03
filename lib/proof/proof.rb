@@ -1,9 +1,9 @@
 module Proof
   def proof(description=nil, &block)
     Proof::Description.current = description
-    Proof.begin
+    Proof.start
     yield
-    Proof.end
+    Proof.stop
     Proof::Description.current = nil
   end
 
@@ -32,11 +32,11 @@ module Proof
     Proof::Output.note comment
   end
 
-  def self.begin
+  def self.start
     CoreExt::Object::Methods.define_prove
   end
 
-  def self.end
+  def self.stop
     CoreExt::Object::Methods.undefine_prove
   end
 end
