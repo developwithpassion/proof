@@ -2,7 +2,8 @@
 
 require_relative 'proofs_init'
 
-files = Dir.glob("proof/**/*.rb")
+files = Dir.glob(File.join(File.dirname(__FILE__), 'proof/**/*.rb'))
+
 files.reject! { |item| /passes\.rb/ =~ item }
 files.reject! { |item| /fails\.rb/ =~ item }
 
