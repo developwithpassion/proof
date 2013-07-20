@@ -4,7 +4,6 @@ module Proof
 
     initializer :error
 
-
     def self.output(error)
       instance = new error
       instance.output
