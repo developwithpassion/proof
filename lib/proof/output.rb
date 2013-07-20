@@ -1,5 +1,3 @@
-require 'ostruct'
-
 module Proof
   class Output
     include Single
