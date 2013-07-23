@@ -10,4 +10,4 @@ See example code at: https://github.com/Sans/proof-example
 
 ## License
 
-Proof is released under the [MIT License](http://www.opensource.org/licenses/MIT).
+Proof is released under the [MIT License](https://github.com/Sans/proof/blob/master/MIT-license.txt).
