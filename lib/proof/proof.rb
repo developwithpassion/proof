@@ -17,13 +17,11 @@ module Proof
 
   def heading(heading)
     Proof::Output.h2 heading
-    if block_given?
-      yield
-    end
+    yield if block_given?
   end
 
-  def section(heading=nil)
-    Proof::Output.h2 heading if heading
+  def section(heading='')
+    Proof::Output.h2 heading
     yield if block_given?
   end
   alias :block :section
