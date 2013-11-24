@@ -2,7 +2,7 @@
 Gem::Specification.new do |s|
   s.name = 'proof'
   s.summary = 'Proof Library'
-  s.version = '0.0.4'
+  s.version = '0.0.5'
   s.authors = ['The Sans Collective']
   s.license = 'MIT'
   s.homepage = 'https://github.com/Sans/proof'
