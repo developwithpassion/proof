@@ -21,7 +21,8 @@ module Proof
   end
 
   def section(heading='')
-    Proof::Output.h2 heading
+    meth = heading.empty? ? :sect : :heading
+    Proof::Output.send meth, heading
     yield if block_given?
   end
   alias :block :section

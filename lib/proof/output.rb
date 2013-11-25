@@ -14,6 +14,8 @@ module Proof
       prefix :h2, text
     end
 
+    writer :sect, :level => :info
+
     writer :pass, :level => :info do |text|
       prefix :pass, "Pass: #{text}"
     end
